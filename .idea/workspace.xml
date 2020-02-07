@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="TestObReport:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5ab2d59b-1cf2-4e58-beff-3d16b62c1ce6" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="TestObReport" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1WbjfH7GUpfAIAXkzTTN3Q3jjXK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RunManager" selected="Application.TestObjReportUI">
+    <configuration name="TestObjReportUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.gw.ui.TestObjReportUI" />
+      <module name="TestObReport" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gw.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestParse" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.gw.test.TestParse" />
+      <module name="TestObReport" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gw.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TestObjReportUI" />
+        <item itemvalue="Application.TestParse" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\dell\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5ab2d59b-1cf2-4e58-beff-3d16b62c1ce6" name="Default Changelist" comment="" />
+      <created>1579425289776</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1579425289776</updated>
+      <workItem from="1579425299626" duration="4316000" />
+      <workItem from="1579480308068" duration="317000" />
+      <workItem from="1579481530670" duration="40980000" />
+      <workItem from="1579585111426" duration="8746000" />
+      <workItem from="1579666356046" duration="22000" />
+      <workItem from="1579666855661" duration="22000" />
+      <workItem from="1579666893026" duration="48000" />
+      <workItem from="1579666968684" duration="11272000" />
+      <workItem from="1579760897651" duration="1896000" />
+      <workItem from="1579847294989" duration="1750000" />
+      <workItem from="1580097711907" duration="14935000" />
+      <workItem from="1580185146717" duration="2456000" />
+      <workItem from="1580219861879" duration="609000" />
+      <workItem from="1580273771383" duration="5538000" />
+      <workItem from="1580296923715" duration="7000" />
+      <workItem from="1580296943678" duration="40000" />
+      <workItem from="1580297003883" duration="155000" />
+      <workItem from="1580297199114" duration="2637000" />
+      <workItem from="1580354625898" duration="616000" />
+      <workItem from="1580389010606" duration="106000" />
+      <workItem from="1580692463260" duration="29215000" />
+      <workItem from="1580781093931" duration="14329000" />
+      <workItem from="1580866293413" duration="3338000" />
+      <workItem from="1580960060908" duration="4608000" />
+      <workItem from="1581040140235" duration="662000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="488" y="79" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog" timestamp="1579500702611">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="79" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog/0.0.1366.728@0.0.1366.728" timestamp="1579500702611" />
+    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1580131849561">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1580131849561" />
+    <state x="413" y="154" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1579597329829">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="154" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1579597329829" />
+    <state x="534" y="256" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1579425330289">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="534" y="256" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1579425330289" />
+    <state x="413" y="122" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1579498078769">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="122" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1366.728@0.0.1366.728" timestamp="1579498078769" />
+    <state x="438" y="72" key="#xdebugger.evaluate" timestamp="1580722436494">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="438" y="72" key="#xdebugger.evaluate/0.0.1366.728@0.0.1366.728" timestamp="1580722436494" />
+    <state x="442" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1580786176867">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="442" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1580786176867" />
+    <state width="486" height="680" key="DebuggerActiveHint" timestamp="1580793896362">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="486" height="680" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1580793896362" />
+    <state x="463" y="122" key="FileChooserDialogImpl" timestamp="1581040200850">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="122" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1581040200850" />
+    <state width="1323" height="161" key="GridCell.Tab.0.bottom" timestamp="1580870866539">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="161" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
+    <state width="1323" height="161" key="GridCell.Tab.0.center" timestamp="1580870866539">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="161" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
+    <state width="1323" height="161" key="GridCell.Tab.0.left" timestamp="1580870866539">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="161" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
+    <state width="1323" height="161" key="GridCell.Tab.0.right" timestamp="1580870866539">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="161" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
+    <state width="1323" height="161" key="GridCell.Tab.1.bottom" timestamp="1580870866549">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="161" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580870866549" />
+    <state width="1323" height="161" key="GridCell.Tab.1.center" timestamp="1580870866549">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="161" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1580870866549" />
+    <state width="1323" height="161" key="GridCell.Tab.1.left" timestamp="1580870866549">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="161" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
+    <state width="1323" height="161" key="GridCell.Tab.1.right" timestamp="1580870866549">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="161" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1580870866549" />
+    <state x="165" y="6" width="1038" height="722" key="SettingsEditor" timestamp="1580275351511">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="165" y="6" width="1038" height="722" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1580275351511" />
+    <state x="404" y="105" width="549" height="524" key="StructurePopup" timestamp="1580788575804">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="404" y="105" width="549" height="524" key="StructurePopup/0.0.1366.728@0.0.1366.728" timestamp="1580788575804" />
+    <state x="522" y="366" width="342" height="244" key="classpath-attribute-editor" timestamp="1579597361408">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="522" y="366" width="342" height="244" key="classpath-attribute-editor/0.0.1366.728@0.0.1366.728" timestamp="1579597361408" />
+    <state x="540" y="301" key="com.intellij.ide.ui.customization.CustomizableActionsPanel$EditIconDialog" timestamp="1579500937231">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="540" y="301" key="com.intellij.ide.ui.customization.CustomizableActionsPanel$EditIconDialog/0.0.1366.728@0.0.1366.728" timestamp="1579500937231" />
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1581040143599">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1581040143599" />
+    <state x="370" y="119" width="626" height="490" key="find.popup" timestamp="1580967740433">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="370" y="119" width="626" height="490" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1580967740433" />
+    <state x="115" y="74" key="new project wizard" timestamp="1580186035011">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="115" y="74" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1580186035011" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1580969410085">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1580969410085" />
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1580969414748">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1580969414748" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="this.xmlConfig" language="JAVA" />
+        <watch expression="cmd" />
+        <watch expression="((java.util.ArrayList)((Itr)((WorkItemIteratorImpl)it).it).this$0).get(0)" custom="java.util.ArrayList.Itr,com.mks.api.response.impl.WorkItemIteratorImpl,java.util.ArrayList" />
+        <watch expression="((java.util.ArrayList)((Itr)((WorkItemIteratorImpl)it).it).this$0).get(0)" language="JAVA" custom="java.util.ArrayList.Itr,com.mks.api.response.impl.WorkItemIteratorImpl,java.util.ArrayList" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
