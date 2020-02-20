@@ -1,4 +1,4 @@
-package com.gw.util;
+package com.fc.util;
 
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -31,8 +31,8 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 
-import com.gw.service.ExcelUtil;
-import com.gw.ui.TestObjReportUI;
+import com.fc.service.ExcelUtil;
+import com.fc.ui.ExportApplicationUI;
 
 /**
  * POI导出excel表格
@@ -229,7 +229,7 @@ public class GenerateXmlUtil {
 	public static Workbook exportComplexExcel(List<List<String>> listHeaders, List<List<Object>> datas,
 			List<String> needMoreWidthField, String name, List<CellRangeAddress> merges, String Category) {
 
-		TestObjReportUI.logger.info("reverse is data:" + datas);
+		ExportApplicationUI.logger.info("reverse is data:" + datas);
 		if (listHeaders == null || listHeaders.size() < 1 || listHeaders.get(0) == null) {
 			return null;
 		}

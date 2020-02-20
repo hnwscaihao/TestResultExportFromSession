@@ -1,4 +1,4 @@
-package com.gw.service;
+package com.fc.service;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -46,9 +46,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.gw.ui.TestObjReportUI;
-import com.gw.util.GenerateXmlUtil;
-import com.gw.util.MKSCommand;
+import com.fc.ui.ExportApplicationUI;
+import com.fc.util.GenerateXmlUtil;
+import com.fc.util.MKSCommand;
 import com.mks.api.response.APIException;
 
 @SuppressWarnings("all")
@@ -109,14 +109,12 @@ public class ExcelUtil {
 	 * @param project
 	 * @throws APIException
 	 */
-	public List<String> parseXML(String dept, String Category) throws APIException {
+	public List<String> parseXML(String Category) throws APIException {
 		List<String> exportTypes = new ArrayList<String>();// 导出类型list
 		try {
-			TestObjReportUI.logger.info("start to parse xml : " + dept + POST_CONFIG_FILE);
 
 			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(ExcelUtil.class.getClassLoader().getResourceAsStream("BMSMapping.xml"));
-//					.parse(ExcelUtil.class.getClassLoader().getResourceAsStream(dept + POST_CONFIG_FILE));
+					.parse(ExcelUtil.class.getClassLoader().getResourceAsStream("ExportMapping.xml"));
 			Element root = document.getDocumentElement();
 
 			if (root != null) {
@@ -147,13 +145,13 @@ public class ExcelUtil {
 				}
 			}
 		} catch (ParserConfigurationException e) {
-			TestObjReportUI.logger.error("parse config file exception", e);
+			ExportApplicationUI.logger.error("parse config file exception", e);
 		} catch (SAXException e) {
-			TestObjReportUI.logger.error("get config file exception", e);
+			ExportApplicationUI.logger.error("get config file exception", e);
 		} catch (IOException e) {
-			TestObjReportUI.logger.error("io exception", e);
+			ExportApplicationUI.logger.error("io exception", e);
 		} finally {
-			TestObjReportUI.logger.info(" xmlConfig: " + xmlConfig + " \n, the ptcTestCaseColumns: " + contentColumns);
+			ExportApplicationUI.logger.info(" xmlConfig: " + xmlConfig + " \n, the ptcTestCaseColumns: " + contentColumns);
 			return exportTypes;
 		}
 	}
@@ -192,161 +190,156 @@ public class ExcelUtil {
 	 * @param path
 	 * @throws Exception
 	 */
-	public void exportReport(List<String> tObjIds, MKSCommand cmd, String path, String exportType) throws Exception {
-		this.parseXML(TestObjReportUI.dept, exportType); // 解析xml
+	public void exportReport(List<String> caseIDList, MKSCommand cmd, String path, String exportType) throws Exception {
+		this.parseXML( exportType); // 解析xml
 		int resultStep = resultHeaders.size();
 		GenerateXmlUtil.caseHeaders.addAll(new ArrayList<String>(contentHeaders));
 		// 这里查询testSession 字段拼接
 		// caseHeaders.add("Test Environment");
 		int parentIndex = -1;
 		int maxLength = 0;
-		for (String id : tObjIds) {
-			List<String> caseFields = contentColumns.get(exportType);
-			if (parentStructure) {
-				caseFields.add("Contains");
-			}
-			List<Map<String, String>> testCaseItem = cmd.allContents(id, caseFields);// 测试用例字段
-			List<String> testSteps = cmd.getTestSteps(realStepFields);// testSteps集合
-			List<Map<String, String>> list = this.xmlConfig.get(exportType);
-			int col = 0;
-			for (String field : contentHeaders) {
-				headerTwos.add("");
-				headers.add(field);
-				CellRangeAddress input = new CellRangeAddress(0, 1, col, col);// 单元格范围
-				col++;
-				cellList.add(input);
-			}
-			TestObjReportUI.logger.info("get " + exportType + " data : " + testCaseItem);// 取到系统中的字段。
-
-			int dataIndex = 0;
-			if (parentStructure && headers.contains("Parent")) {// parent字段位置
-				parentIndex = headers.indexOf("Parent");
-			}
-			for (Map<String, String> testCase : testCaseItem) {
-				// Test Case 中的字段
-				data = new ArrayList<>();// 行数据
-				for (String header : contentHeaders) {
-					String realField = HEADER_MAP.get(header);
-					String value = realField == null ? ""
-							: testCase.get(realField) == null ? "" : testCase.get(realField);
-					if (parentStructure && "Parent".equals(header)) {
-						parentIndex = headers.indexOf(header);
-						if (id.equals(value))// MCU部门 Parent字段导出，如果父ID为Document
-												// ID，则为P(父级),否则为C(子级)
-							value = "P";
-						else
-							value = "C";
-					}
-					data.add(value);
-				}
-
-				// ---------Test Step
-				if (hasStepField) {
-					List<String> StepsIDsList = new ArrayList<>();// testStepiD集合
-					String steps = testCase.get("Test Steps");
-					if (steps != null && !"".equals(steps)) { // 如果Test
-																// Steps字段不为空
-																// 再去查里面的字段。
-						String[] StepsID = steps.split(",");
-						for (int i = 0; i < StepsID.length; i++) {
-							StepsIDsList.add(StepsID[i]);
-						}
-						getStepsItem(cmd, StepsIDsList, testSteps, headers, mergerStep);// 再次查询Test
-																						// Steps
-																						// 中字段。
-					} // steps
-				}
-
-				// 获得TestResult信息。
-				if (resultStartIndex < data.size()) {
-					resultStartIndex = data.size();
-				}
-				if (maxLength < data.size()) {
-					maxLength = data.size();
-				}
-				datas.add(data);// 拼接完所有数据 为一行
-			} // testCaseFor
-			/** 空行时，添加testStep 列标题 */
-			if (hasStepField && stepHeaders.size() > 1 && !(headerTwos.contains("Test Step ID")
-					|| headerTwos.contains("Input I/F") || headerTwos.contains("Output I/F"))) {
-				if (stepHeaders.contains("Source Filename")) {
-					headers.add("Call Depth");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-				} else if (mergerStep) {
-					headers.add("Input");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("Output");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-				} else {
-					headers.add("Test Step"); // 如果有添加进 第一行标题
-					for (int i = 1; i < stepHeaders.size() - 1; i++) {
-						headers.add("-");
-					}
-				}
-				for (String stepField : stepHeaders) {
-					headerTwos.add(stepField);
-
-				}
-				if (stepHeaders.contains("Source Filename")) {
-					CellRangeAddress Output = new CellRangeAddress(0, 0, contentHeaders.size(),
-							contentHeaders.size() + 5);
-					cellList.add(Output);
-				} else if (mergerStep) {
-					CellRangeAddress input = new CellRangeAddress(0, 0, contentHeaders.size(),
-							contentHeaders.size() + 4);
-					cellList.add(input);
-					CellRangeAddress Output = new CellRangeAddress(0, 0, contentHeaders.size() + 5,
-							contentHeaders.size() + 9);
-					cellList.add(Output);
-				} else {// MCU 合并4个单元格
-					CellRangeAddress Output = new CellRangeAddress(0, 0, contentHeaders.size(),
-							contentHeaders.size() + 3);
-					cellList.add(Output);
-				}
-				maxLength = contentHeaders.size() + stepHeaders.size();
-				if (startInteger < maxLength) {
-					startInteger = maxLength;
-				}
-			}
-
-			if (hasResultField) {// 含有测试结果列
-				for (int k = 0; k < testCaseItem.size(); k++) {
-					Map<String, String> testCase = testCaseItem.get(k);
-					List<Object> data = datas.get(k);
-					int emptyCount = maxLength - data.size();
-					for (int m = 0; m < emptyCount; m++) {
-						data.add("");
-					}
-					boolean needResult = true;
-					if (parentStructure) {// 有父子级结构
-						String structureVal = (String) data.get(parentIndex);// MCU
-																				// 导出，P
-																				// 结构且有子级不导出测试结果
-						String containValue = testCase.get("Contains");
-						if ("P".equals(structureVal) && containValue != null && !"".equals(containValue)) {
-							needResult = false;
-						}
-					}
-					if (needResult) {// MCU 导出，P 结构且有子级不导出测试结果；否则，都导出测试结果
-						getTestResult(cmd, testCase, data, mergerStep);
-					}
-				}
-			}
-
-			listHeaders.add(headers);// 添加完第一行标题
-			listHeaders.add(headerTwos);// 添加完第二行标题
-
+		List<String> caseFields = contentColumns.get(exportType);
+		if (parentStructure) {
+			caseFields.add("Contains");
 		}
+		List<Map<String, String>> testCaseItem = cmd.getItemByIds(caseIDList, caseFields);// 测试用例字段
+		List<String> testSteps = cmd.getTestSteps(realStepFields);// testSteps集合
+		List<Map<String, String>> list = this.xmlConfig.get(exportType);
+		int col = 0;
+		for (String field : contentHeaders) {
+			headerTwos.add("");
+			headers.add(field);
+			CellRangeAddress input = new CellRangeAddress(0, 1, col, col);// 单元格范围
+			col++;
+			cellList.add(input);
+		}
+		ExportApplicationUI.logger.info("get " + exportType + " data : " + testCaseItem);// 取到系统中的字段。
+
+		int dataIndex = 0;
+		if (parentStructure && headers.contains("Parent")) {// parent字段位置
+			parentIndex = headers.indexOf("Parent");
+		}
+		for (Map<String, String> testCase : testCaseItem) {
+			// Test Case 中的字段
+			String caseId = testCase.get("ID");
+			data = new ArrayList<>();// 行数据
+			for (String header : contentHeaders) {
+				String realField = HEADER_MAP.get(header);
+				
+				String value = realField == null ? ""
+						: testCase.get(realField) == null ? "" : testCase.get(realField);
+				if (parentStructure && "Parent".equals(header)) {
+					parentIndex = headers.indexOf(header);
+				}
+				data.add(value);
+			}
+
+			// ---------Test Step
+			if (hasStepField) {
+				List<String> StepsIDsList = new ArrayList<>();// testStepiD集合
+				String steps = testCase.get("Test Steps");
+				if (steps != null && !"".equals(steps)) { // 如果Test
+															// Steps字段不为空
+															// 再去查里面的字段。
+					String[] StepsID = steps.split(",");
+					for (int i = 0; i < StepsID.length; i++) {
+						StepsIDsList.add(StepsID[i]);
+					}
+					getStepsItem(cmd, StepsIDsList, testSteps, headers, mergerStep);// 再次查询Test
+																					// Steps
+																					// 中字段。
+				} // steps
+			}
+
+			// 获得TestResult信息。
+			if (resultStartIndex < data.size()) {
+				resultStartIndex = data.size();
+			}
+			if (maxLength < data.size()) {
+				maxLength = data.size();
+			}
+			datas.add(data);// 拼接完所有数据 为一行
+		} // testCaseFor
+		/** 空行时，添加testStep 列标题 */
+		if (hasStepField && stepHeaders.size() > 1 && !(headerTwos.contains("Test Step ID")
+				|| headerTwos.contains("Input I/F") || headerTwos.contains("Output I/F"))) {
+			if (stepHeaders.contains("Source Filename")) {
+				headers.add("Call Depth");
+				headers.add("-");
+				headers.add("-");
+				headers.add("-");
+				headers.add("-");
+				headers.add("-");
+			} else if (mergerStep) {
+				headers.add("Input");
+				headers.add("-");
+				headers.add("-");
+				headers.add("-");
+				headers.add("-");
+				headers.add("Output");
+				headers.add("-");
+				headers.add("-");
+				headers.add("-");
+				headers.add("-");
+			} else {
+				headers.add("Test Step"); // 如果有添加进 第一行标题
+				for (int i = 1; i < stepHeaders.size() - 1; i++) {
+					headers.add("-");
+				}
+			}
+			for (String stepField : stepHeaders) {
+				headerTwos.add(stepField);
+
+			}
+			if (stepHeaders.contains("Source Filename")) {
+				CellRangeAddress Output = new CellRangeAddress(0, 0, contentHeaders.size(),
+						contentHeaders.size() + 5);
+				cellList.add(Output);
+			} else if (mergerStep) {
+				CellRangeAddress input = new CellRangeAddress(0, 0, contentHeaders.size(),
+						contentHeaders.size() + 4);
+				cellList.add(input);
+				CellRangeAddress Output = new CellRangeAddress(0, 0, contentHeaders.size() + 5,
+						contentHeaders.size() + 9);
+				cellList.add(Output);
+			} else {
+				CellRangeAddress Output = new CellRangeAddress(0, 0, contentHeaders.size(),
+						contentHeaders.size() + 3);
+				cellList.add(Output);
+			}
+			maxLength = contentHeaders.size() + stepHeaders.size();
+			if (startInteger < maxLength) {
+				startInteger = maxLength;
+			}
+		}
+
+		if (hasResultField) {// 含有测试结果列
+			for (int k = 0; k < testCaseItem.size(); k++) {
+				Map<String, String> testCase = testCaseItem.get(k);
+				List<Object> data = datas.get(k);
+				int emptyCount = maxLength - data.size();
+				for (int m = 0; m < emptyCount; m++) {
+					data.add("");
+				}
+				boolean needResult = true;
+				if (parentStructure) {// 有父子级结构
+					String structureVal = (String) data.get(parentIndex);
+																			// 导出，P
+																			// 结构且有子级不导出测试结果
+					String containValue = testCase.get("Contains");
+					if ("P".equals(structureVal) && containValue != null && !"".equals(containValue)) {
+						needResult = false;
+					}
+				}
+				if (needResult) {// P 结构且有子级不导出测试结果；否则，都导出测试结果
+					getTestResult(cmd, testCase, data, mergerStep);
+				}
+			}
+		}
+
+		listHeaders.add(headers);// 添加完第一行标题
+		listHeaders.add(headerTwos);// 添加完第二行标题
+
 
 		if (hasResultField && !(headerTwos.contains("Severity") || headerTwos.contains("Reproducibility")
 				|| headerTwos.contains("Tester"))) {
@@ -380,11 +373,6 @@ public class ExcelUtil {
 		needMoreWidthField.add("Input I/F & Data");
 		needMoreWidthField.add("Output I/F & Data");
 		needMoreWidthField.add("Test Procedure");
-		if ("MCU".equals(TestObjReportUI.dept)) {
-			needMoreWidthField.add("Input");
-			needMoreWidthField.add("Output");
-			needMoreWidthField.add("Description");
-		}
 
 		/** 获取Category信息 */
 		String documentType = "Test Suite";
@@ -404,7 +392,7 @@ public class ExcelUtil {
 		FIELD_TYPE_RECORD.putAll(cmd.getAllFieldType(importFields, PICK_FIELD_RECORD));
 		replaceLogid(cmd);// logid 替换为FullName(工号)
 
-		String trueType = TestObjReportUI.trueType;
+		String trueType = ExportApplicationUI.trueType;
 		/** 获取 Pick 值信息 */
 		Workbook wookbook = GenerateXmlUtil.exportComplexExcel(listHeaders, datas, needMoreWidthField, trueType,
 				cellList, exportType);
@@ -412,19 +400,19 @@ public class ExcelUtil {
 			wookbook = new HSSFWorkbook();
 		}
 		// 拼接判断文件路径名称
-		String dept = TestObjReportUI.dept;
 		String documentName = MyRunnable.class.newInstance().documentName;
 		SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd");// 设置日期格式
 		String time = df.format(new Date());
+		String sessionId = ExportApplicationUI.tsIds.get(0);
 		try {
 			String actualPath = path.endsWith(".xls") ? path
-					: path + "\\" + dept + "_" + documentName + "_" + time + "_(" + 1 + ")-" + tObjIds.get(0).toString()
+					: path + "\\" + documentName + "_" + time + "_(" + 1 + ")-" + sessionId
 							+ ".xls";
 			File file = new File(actualPath);
 			if (!file.exists()) {
 				outputFromwrok(actualPath, wookbook);
 			} else {
-				int showConfirmDialog = JOptionPane.showConfirmDialog(TestObjReportUI.contentPane,
+				int showConfirmDialog = JOptionPane.showConfirmDialog(ExportApplicationUI.contentPane,
 						"The file already exists, Whether to overwrite this file?");
 				String absolutePath = file.getAbsolutePath();
 				if (showConfirmDialog == 0) {// 覆盖
@@ -439,319 +427,15 @@ public class ExcelUtil {
 						for (File file2 : listFiles) {
 							String filePath = file2.toString();
 							if (filePath.endsWith("xls") || filePath.endsWith("xlsx")) {
-								if ((filePath.endsWith("-" + tObjIds.get(0).toString() + ".xls")
-										|| filePath.endsWith("-" + tObjIds.get(0).toString() + ".xlsx"))
-										&& filePath.contains(dept + "_" + documentName + "_" + time)) {
+								if ((filePath.endsWith("-" + sessionId + ".xls")
+										|| filePath.endsWith("-" + sessionId + ".xlsx"))
+										&& filePath.contains( documentName + "_" + time)) {
 									count++;
 								}
 							}
 						}
-						String actualPath2 = path + "\\" + dept + "_" + documentName + "_" + time + "_(" + count + ")-"
-								+ tObjIds.get(0).toString() + ".xls";
-						outputFromwrok(actualPath2, wookbook);
-					}
-
-				}
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 根据sessionid查询测试结果 导出到 Excel模板 lxg
-	 * @param tObjIds
-	 * @param cmd
-	 * @param path
-	 * @throws Exception
-	 */
-	public void getSessionIdByresultExportReport(List<String> tObjIds, MKSCommand cmd, String path, String exportType) throws Exception {
-		this.parseXML(TestObjReportUI.dept, exportType); // 解析xml
-		int resultStep = resultHeaders.size();
-		GenerateXmlUtil.caseHeaders.addAll(new ArrayList<String>(contentHeaders));
-		// 这里查询testSession 字段拼接
-		// caseHeaders.add("Test Environment");
-		int parentIndex = -1;
-		int maxLength = 0;
-		for (String id : tObjIds) {
-			List<String> caseFields = contentColumns.get(exportType);
-			if (parentStructure) {
-				caseFields.add("Contains");
-			}
-//			List<Map<String, String>> testCaseItem = cmd.getRequstTestById(id,Arrays.asList("sessionid", "caseid", "verdict"));
-//			List<Map<String, String>> testCaseItem = cmd.mlsj(); //测试数据 lxg
-			List<Map<String, String>> testCaseItem = new ArrayList<Map<String,String>>();
-			Map<String, String>  caseIds = cmd.viewIssueBySessionId(id,"sessionId"); //caseId | sessionId
-			String[] ids = caseIds.get("Tests").split(",");
-
-			for(int i=0;i<ids.length;i++){
-				Map<String, String>  views = cmd.viewIssueBySessionId(ids[i],"caseId");
-				views.put("Session ID",caseIds.get("ID"));
-				views.put("Test Environment",caseIds.get("Test Environment"));
-				views.put("Actual End Date",caseIds.get("Actual End Date"));
-				testCaseItem.add(views);
-			}
-
-			List<String> testSteps = cmd.getTestSteps(realStepFields);// testSteps集合
-			List<Map<String, String>> list = this.xmlConfig.get(exportType);
-			int col = 0;
-			for (String field : contentHeaders) {
-				headerTwos.add("");
-				headers.add(field);
-				CellRangeAddress input = new CellRangeAddress(0, 1, col, col);// 单元格范围
-				col++;
-				cellList.add(input);
-			}
-			TestObjReportUI.logger.info("get " + exportType + " data : " + testCaseItem);// 取到系统中的字段。
-
-			int dataIndex = 0;
-			if (parentStructure && headers.contains("Parent")) {// parent字段位置
-				parentIndex = headers.indexOf("Parent");
-			}
-			for (Map<String, String> testCase : testCaseItem) {
-				// Test Case 中的字段
-				data = new ArrayList<>();// 行数据
-				for (String header : contentHeaders) {
-					TestObjReportUI.logger.info("HEADER_MAP " + HEADER_MAP);
-					String realField = HEADER_MAP.get(header);
-					String value = realField == null ? ""
-							: testCase.get(realField) == null ? "" : testCase.get(realField);
-					if (parentStructure && "Parent".equals(header)) {
-						parentIndex = headers.indexOf(header);
-						if (id.equals(value))// MCU部门 Parent字段导出，如果父ID为Document
-							// ID，则为P(父级),否则为C(子级)
-							value = "P";
-						else
-							value = "C";
-					}
-					data.add(value);
-				}
-				// ---------Test Step
-				if (hasStepField) {
-					List<String> StepsIDsList = new ArrayList<>();// testStepiD集合
-//					String steps = "21178";
-					String steps = testCase.get("Test Steps");
-					if (steps != null && !"".equals(steps)) { // 如果Test
-						// Steps字段不为空
-						// 再去查里面的字段。
-						String[] StepsID = steps.split(",");
-						for (int i = 0; i < StepsID.length; i++) {
-							StepsIDsList.add(StepsID[i]);
-						}
-						getStepsItem(cmd, StepsIDsList, testSteps, headers, mergerStep);// 再次查询Test
-						// Steps
-						// 中字段。
-//						data.add("");
-					} // steps
-				}
-
-				//二级表头result添加数据 lxg
-			/*	if (hasResultField) {// 含有测试结果列 resultHeaders  resultHeaderMap
-					for (String resultheader : resultHeaders) {
-						String realField = resultHeaderMap.get(resultheader);
-						TestObjReportUI.logger.info("表头: " + realField+";值: "+testCase.get(realField));
-						String value =  testCase.get(realField);
-						data.add(value);
-					}
-				}*/
-
-
-				// 获得TestResult信息。
-				if (resultStartIndex < data.size()) {
-					resultStartIndex = data.size();
-				}
-				if (maxLength < data.size()) {
-					maxLength = data.size();
-				}
-				datas.add(data);// 拼接完所有数据 为一行
-			} // testCaseFor
-			/** 空行时，添加testStep 列标题 */
-/** 空行时，添加testStep 列标题 */
-			if (hasStepField && stepHeaders.size() > 1 && !(headerTwos.contains("Test Step ID")
-					|| headerTwos.contains("Input I/F") || headerTwos.contains("Output I/F"))) {
-				if (stepHeaders.contains("Source Filename")) {
-					headers.add("Call Depth");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-				} else if (mergerStep) {
-					headers.add("Input");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("Output");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-					headers.add("-");
-				} else {
-					headers.add("Test Step"); // 如果有添加进 第一行标题
-					for (int i = 1; i < stepHeaders.size() - 1; i++) {
-						headers.add("-");
-					}
-				}
-				for (String stepField : stepHeaders) {
-					headerTwos.add(stepField);
-
-				}
-				if (stepHeaders.contains("Source Filename")) {
-					CellRangeAddress Output = new CellRangeAddress(0, 0, contentHeaders.size(),
-							contentHeaders.size() + 5);
-					cellList.add(Output);
-				} else if (mergerStep) {
-					CellRangeAddress input = new CellRangeAddress(0, 0, contentHeaders.size(),
-							contentHeaders.size() + 4);
-					cellList.add(input);
-					CellRangeAddress Output = new CellRangeAddress(0, 0, contentHeaders.size() + 5,
-							contentHeaders.size() + 9);
-					cellList.add(Output);
-				} else {// MCU 合并4个单元格
-					CellRangeAddress Output = new CellRangeAddress(0, 0, contentHeaders.size(),
-							contentHeaders.size() + 3);
-					cellList.add(Output);
-				}
-				maxLength = contentHeaders.size() + stepHeaders.size();
-				if (startInteger < maxLength) {
-					startInteger = maxLength;
-				}
-			}
-
-			if (hasResultField) {// 含有测试结果列 resultHeaders
-				for (int k = 0; k < testCaseItem.size(); k++) {
-					Map<String, String> testCase = testCaseItem.get(k);
-					List<Object> data = datas.get(k);
-					int emptyCount = maxLength - data.size();
-					for (int m = 0; m < emptyCount; m++) {
-						data.add("");
-					}
-					boolean needResult = true;
-					if (parentStructure) {// 有父子级结构
-						String structureVal = (String) data.get(parentIndex);// MCU
-						// 导出，P
-						// 结构且有子级不导出测试结果
-						String containValue = testCase.get("Contains");
-						if ("P".equals(structureVal) && containValue != null && !"".equals(containValue)) {
-							needResult = false;
-						}
-					}
-					if (needResult) {// MCU 导出，P 结构且有子级不导出测试结果；否则，都导出测试结果
-						getTestResult(cmd, testCase, data, mergerStep);
-					}
-				}
-			}
-
-			listHeaders.add(headers);// 添加完第一行标题
-			listHeaders.add(headerTwos);// 添加完第二行标题
-
-		}
-
-		if (hasResultField && !(headerTwos.contains("Severity") || headerTwos.contains("Reproducibility")
-				|| headerTwos.contains("Tester"))) {
-				headers.add("1-Cycle Test");
-
-			for (String stepField : resultHeaders) {
-				headerTwos.add(stepField);
-				headers.add(" ");
-			}
-			headers.remove(headers.size() - 1);
-			if (startInteger < contentHeaders.size()) {
-				startInteger = contentHeaders.size();
-			}
-			CellRangeAddress result = new CellRangeAddress(0, 0, startInteger, startInteger + resultHeaders.size() - 1);
-			cellList.add(result);
-			maxLength = maxLength + resultHeaders.size();
-		}
-
-		for (List<Object> rowData : datas) {
-			int emptyCellCount = headers.size() - rowData.size();
-			if (emptyCellCount > 0) {
-				for (int count = 0; count < emptyCellCount; count++) {
-					rowData.add("");
-				}
-			}
-		}
-
-		List<String> needMoreWidthField = new ArrayList<String>();
-		needMoreWidthField.add("Text(Description)");
-		needMoreWidthField.add("Expected Results");
-		needMoreWidthField.add("Test Environment");
-		needMoreWidthField.add("Test case description");
-		needMoreWidthField.add("Test Case");
-		needMoreWidthField.add("Input I/F & Data");
-		needMoreWidthField.add("Output I/F & Data");
-		needMoreWidthField.add("Test Procedure");
-		if ("MCU".equals(TestObjReportUI.dept)) {
-			needMoreWidthField.add("Input");
-			needMoreWidthField.add("Output");
-			needMoreWidthField.add("Description");
-		}
-
-		/** 获取Category信息 */
-		String documentType = "Test Suite";
-		if (!exportType.contains("Test")) {
-			documentType = exportType;
-		}
-		parseCurrentCategories(documentType);
-		/** 获取Category信息 */
-		/** 获取 Pick 值信息 */
-		List<String> importFields = new ArrayList<String>();
-		for (String header : contentHeaders) {
-			String field = HEADER_MAP.get(header);
-			if (!"-".equals(field)) {
-				importFields.add(field);
-			}
-		}
-		FIELD_TYPE_RECORD.putAll(cmd.getAllFieldType(importFields, PICK_FIELD_RECORD));
-		replaceLogid(cmd);// logid 替换为FullName(工号)
-
-		String trueType = TestObjReportUI.trueType;
-		/** 获取 Pick 值信息 */
-		Workbook wookbook = GenerateXmlUtil.exportComplexExcel(listHeaders, datas, needMoreWidthField, trueType,
-				cellList, exportType);
-		if (wookbook == null) {
-			wookbook = new HSSFWorkbook();
-		}
-		// 拼接判断文件路径名称
-		String dept = TestObjReportUI.dept;
-		String documentName = MyRunnable.class.newInstance().documentName;
-		SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd");// 设置日期格式
-		String time = df.format(new Date());
-		try {
-			String actualPath = path.endsWith(".xls") ? path
-					: path + "\\" + dept + "_" + documentName + "_" + time + "_(" + 1 + ")-" + tObjIds.get(0).toString()
-					+ ".xls";
-			File file = new File(actualPath);
-			if (!file.exists()) {
-				outputFromwrok(actualPath, wookbook);
-			} else {
-				int showConfirmDialog = JOptionPane.showConfirmDialog(TestObjReportUI.contentPane,
-						"The file already exists, Whether to overwrite this file?");
-				String absolutePath = file.getAbsolutePath();
-				if (showConfirmDialog == 0) {// 覆盖
-					outputFromwrok(actualPath, wookbook);
-				} else if (showConfirmDialog == 1) {// 不覆盖
-					File pathFile = new File(actualPath);
-					String parent = pathFile.getParent();
-					File fileDir = new File(parent);
-					if (fileDir.isDirectory()) {
-						File[] listFiles = fileDir.listFiles();
-						int count = 1;
-						for (File file2 : listFiles) {
-							String filePath = file2.toString();
-							if (filePath.endsWith("xls") || filePath.endsWith("xlsx")) {
-								if ((filePath.endsWith("-" + tObjIds.get(0).toString() + ".xls")
-										|| filePath.endsWith("-" + tObjIds.get(0).toString() + ".xlsx"))
-										&& filePath.contains(dept + "_" + documentName + "_" + time)) {
-									count++;
-								}
-							}
-						}
-						String actualPath2 = path + "\\" + dept + "_" + documentName + "_" + time + "_(" + count + ")-"
-								+ tObjIds.get(0).toString() + ".xls";
+						String actualPath2 = path + "\\" + documentName + "_" + time + "_(" + count + ")-"
+								+ sessionId + ".xls";
 						outputFromwrok(actualPath2, wookbook);
 					}
 
@@ -843,7 +527,8 @@ public class ExcelUtil {
 	 */
 	private boolean getTestResult(MKSCommand cmd, Map<String, String> testCase, List<Object> data, boolean mergerStep)
 			throws APIException {
-		List<Map<String, Object>> result = cmd.getResult(testCase.get("ID"), testCase.get("ID"), "Test Case");
+		
+		List<Map<String, Object>> result = cmd.getResult(ExportApplicationUI.tsIds.get(0), testCase.get("ID"), "Test Case");
 		if (result != null && result.size() > 0) {
 			if (CycleTest < result.size()) {
 				CycleTest = result.size();
@@ -857,16 +542,7 @@ public class ExcelUtil {
 			if (!mergerStep)
 				mergeName = " Cycle Test Report";
 			int testEnvironIndex = headers.indexOf("Test Environment");
-			Collections.sort(result, new Comparator<Map<String,Object>>() {
-				@Override
-				public int compare(Map<String, Object> map1, Map<String, Object> map2) {
-					Integer session1 = (Integer)map1.get("sessionID");
-					Integer session2 = (Integer)map2.get("sessionID");
-					return session1 - session2;
-				}
-			});
 			for (Map<String, Object> map : result) {
-				Object sessionID = map.get("sessionID");
 				int testerIndex = 0;
 				int testDateIndex = 0;
 				for (String field : resultHeaders) {
@@ -882,17 +558,14 @@ public class ExcelUtil {
 				}
 
 				// 查询Test Session
-				List<Map<String, String>> itemByIds = cmd.getItemByIds(Arrays.asList(sessionID.toString()),
-						Arrays.asList("Assigned Users", "Actual End Date", "Test Environment"));
-				if (itemByIds.size() > 0) {
-					Map<String, String> sessionmap = itemByIds.get(0);
-					data.set(testerIndex, cmd.getUserNames(sessionmap.get("Assigned Users")));
-					if (resultHeaders.contains("Test Date") || resultHeaders.contains("Date of Test")) {
-						data.set(testDateIndex, sessionmap.get("Actual End Date"));
-					}
-					if (testEnvironIndex > -1) {
-						data.set(testEnvironIndex, sessionmap.get("Test Environment"));
-					}
+			
+				Map<String, String> sessionmap = ExportApplicationUI.sessionMap;
+				data.set(testerIndex, cmd.getUserNames(sessionmap.get("Assigned Users")));
+				if (resultHeaders.contains("Test Date") || resultHeaders.contains("Date of Test")) {
+					data.set(testDateIndex, sessionmap.get("Actual End Date"));
+				}
+				if (testEnvironIndex > -1) {
+					data.set(testEnvironIndex, sessionmap.get("Test Environment"));
 				}
 
 				if (inputCountMap.get(i + mergeName) == null) {
@@ -1174,7 +847,7 @@ public class ExcelUtil {
 			FileOutputStream output = new FileOutputStream(filePath);
 			wookbook.write(output);
 			output.flush();
-			TestObjReportUI.class.newInstance().isParseSuccess = true;
+			ExportApplicationUI.class.newInstance().isParseSuccess = true;
 
 		} catch (Exception e) {
 			e.printStackTrace();

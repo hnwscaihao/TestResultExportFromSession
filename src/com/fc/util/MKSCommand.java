@@ -1,4 +1,4 @@
-package com.gw.util;
+package com.fc.util;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
-import com.gw.ui.TestObjReportUI;
+import com.fc.ui.ExportApplicationUI;
 import com.mks.api.CmdRunner;
 import com.mks.api.Command;
 import com.mks.api.IntegrationPoint;
@@ -436,6 +436,55 @@ public class MKSCommand {
 		return contents;
 	}
 	
+	/**
+	 * 
+	 * @param documentID
+	 * @return
+	 * @throws APIException 
+	 */
+	public List<String> allContainID(String documentID) throws APIException{
+		List<String> allContainID = new ArrayList<>();
+		Command command = new Command("im","issues");
+		command.addOption(new Option(FIELDS, CONTAINS));
+		command.addSelection(documentID);
+		Response res = mksCmdRunner.execute(command);
+		WorkItemIterator it = res.getWorkItems();
+		SelectionList sl = new SelectionList();
+		List<String> fields = new ArrayList<>();
+		fields.add("ID");
+		while (it.hasNext()) {
+				WorkItem wi = it.next();
+				ItemList il = (ItemList) wi.getField(CONTAINS).getList();
+				for (int i = 0; i < il.size(); i++) {
+					Item item = (Item) il.get(i);
+					String id = item.getId();
+					sl.add(id);
+				}
+		}
+		SelectionList contents = null;
+		if(sl != null&& sl.size()>=1)
+			contents = contains(sl);
+		
+		if (contents.size() > 0) {
+			SelectionList contains = new SelectionList();
+			contains.add(contents);
+			while (true) {
+				SelectionList conteins = contains(contains);
+				if (conteins.size() < 1) {
+					break;
+				}
+				contents.add(conteins);
+				contains = new SelectionList();
+				contains.add(conteins);
+			}
+		}
+		contents.add(sl);
+		for(int i=0; i<contents.size(); i++ ){
+			allContainID.add(contents.getSelection(i));
+		}
+		return allContainID;
+	}
+	
 	public List<Map<String, String>> allContents(String document, List<String> fieldList) throws APIException ,Exception {
 		List<Map<String, String>> returnResult = new ArrayList<Map<String,String>>();
 		Command command = new Command("im","issues");
@@ -446,9 +495,6 @@ public class MKSCommand {
 		SelectionList sl = new SelectionList();
 		List<String> fields = new ArrayList<>();
 		fields.add("ID");
-		if(!fieldList.contains(PARENT_FIELD)){//排序使用
-			fieldList.add(PARENT_FIELD);
-		}
 		if(fieldList != null) {
 			fields.addAll(fieldList);
 		}
@@ -532,8 +578,8 @@ public class MKSCommand {
 	
 	public List<Map<String, String>> queryIssues(SelectionList selectionList,List<String> fields) throws APIException, Exception {
 		List<Map<String, String>> returnResult = new ArrayList<Map<String,String>>();
-		String dept = TestObjReportUI.dept;
-		String trueType   = TestObjReportUI.trueType; 
+		String dept = ExportApplicationUI.dept;
+		String trueType   = ExportApplicationUI.trueType; 
 		boolean needFilter = false;
 		String category = "";
 		if(!"Transmission".equals(dept) && trueType.contains("Test Specification")){
@@ -759,193 +805,13 @@ public class MKSCommand {
 		return relations;
 	}
 
-	/**
-	 * 根据sessionid查看测试实例id与测试结果信息 lxg
-	 * @param id
-	 * @param idType
-	 * @return
-	 * @throws APIException
-	 */
-	public Map<String, String> viewIssueBySessionId(String id, String idType)
-			throws APIException {
-		Command cmd = new Command(Command.IM, "viewissue");
-		MultiValue mv = new MultiValue(",");
-		cmd.addSelection(id);
-		Response res = mksCmdRunner.execute(cmd);
-		WorkItemIterator it = res.getWorkItems();
-		List<Map<String, String>> relations = new ArrayList<Map<String, String>>();
-		Map<String, String> map = new HashMap<>();
-		while (it.hasNext()) {
-			WorkItem wi = it.next();
-			Iterator<?> iterator = wi.getFields();
-//			Map<String, String> map = new HashMap<>();
-			while (iterator.hasNext()) {
-				Field field = (Field) iterator.next();
-				String fieldName = field.getName();
-				System.out.println(fieldName);
-//				if("MKSIssueTestResults".equals(fieldName)){
-//					field.getList();
-//				}
-				//如果是sessionid 则查询test session相关信息 lxg
-				if("sessionId".equals(idType)){
-					if("Tests".equals(fieldName)){
-						StringBuilder sb = new StringBuilder();
-						ItemList il = (ItemList) field.getList();
-						for (int i = 0; i < il.size(); i++) {
-							Item item = (Item) il.get(i);
-							if (i > 0) {
-								sb.append(",");
-							}
-							sb.append(item.getId());
-						}
-						map.put(fieldName, sb.toString());
-					}else if("ID".equals(fieldName) || "Test Environment".equals(fieldName) || "Actual End Date".equals(fieldName)){
-						map.put(fieldName, field.getValue()==null?"":field.getValue().toString());
-					}
-					if("Software version".equals(fieldName) || "Hardware version".equals(fieldName)){
-						System.out.println("123");
-					}
-				}
-                //如果是caseId 则查询caseId相关信息 lxg
-				if("caseId".equals(idType)){
-					String s = fieldName;
-					Object o = field.getValue();
-					if("ID".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Validates".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Priority".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Req.Input".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Req.Output".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Req.Testability".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Test Case No.".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Test type".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Text".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("System Engineer".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("System Engineer Review Result".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Hardware Engineer".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Hardware Engineer Review Result".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("ASW Engineer".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("ASW Engineer Review Result".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("BSW Engineer".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("BSW Engineer Review Result".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Function Safety Engineer".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Function Safety Engineer Review Result".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Test Engineer".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Test Engineer Review Result".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Last Result".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-						if(il.equals("Passed")){
-							map.put("F/P", "P");
-						}else {
-							map.put("F/P", "F");
-						}
-					}
-					if("Test Case Name".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Observed Result".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Comment".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Result Serverity".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("SW Version".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Tester".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-					if("Test Steps".equals(fieldName)){
-						String il =  field.getValue()==null?" ":field.getValue().toString();
-						map.put(fieldName, il);
-					}
-
-				}
-
-			}
-//			relations.add(map);
-		}
-		return map;
-	}
 
 	public List<Map<String, Object>> getResult(String sessionID, String suiteID, String type) throws APIException {
 		List<Map<String, Object>> result = new ArrayList<>();
 		SelectionList list = new SelectionList();
 		Command cmd = new Command("tm", "results");
 		
-		//cmd.addOption(new Option("sessionID", sessionID));
+		cmd.addOption(new Option("sessionID", sessionID));
 //		if (type.equals("Test Suite")) {
 		cmd.addOption(new Option("caseID", suiteID));
 //		} else if (type.equals("Test Case")) {
