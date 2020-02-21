@@ -53,7 +53,7 @@ import com.mks.api.response.APIException;
 
 @SuppressWarnings("all")
 public class ExcelUtil {
-	private static final String POST_CONFIG_FILE = "Mapping.xml";
+	private static final String POST_CONFIG_FILE = "ExportMapping.xml";
 	private static final String CATEGORY_CONFIG_FILE = "Category.xml";
 	Map<String, List<Map<String, String>>> xmlConfig = new HashMap<>();
 	Map<String, List<String>> contentColumns = new HashMap<>();
@@ -314,6 +314,17 @@ public class ExcelUtil {
 		}
 
 		if (hasResultField) {// 含有测试结果列
+			//根据testSessionID，一次将测试结果信息全部查出来
+			List<Map<String, Object>> resultList = cmd.getResult(ExportApplicationUI.tsIds.get(0), null);
+			//将测试结果信息记录到map中
+			Map<String,Map<String,Object>> resultRecordMap = new HashMap<>();
+			if(resultList != null && !resultList.isEmpty()){
+				resultRecordMap = new HashMap<>(resultList.size()*4/3);//防止多次扩容复制，直接设置初始大小超过扩容因子扩容量
+				for(Map<String, Object> resultMap : resultList){
+					String caseID = String.valueOf(resultMap.get("caseID"));
+					resultRecordMap.put(caseID, resultMap);
+				}
+			}
 			for (int k = 0; k < testCaseItem.size(); k++) {
 				Map<String, String> testCase = testCaseItem.get(k);
 				List<Object> data = datas.get(k);
@@ -331,8 +342,10 @@ public class ExcelUtil {
 						needResult = false;
 					}
 				}
+				
 				if (needResult) {// P 结构且有子级不导出测试结果；否则，都导出测试结果
-					getTestResult(cmd, testCase, data, mergerStep);
+					String caseID = testCase.get("ID");
+					getTestResult(cmd, testCase, data, mergerStep,resultRecordMap.get(caseID));
 				}
 			}
 		}
@@ -343,7 +356,8 @@ public class ExcelUtil {
 
 		if (hasResultField && !(headerTwos.contains("Severity") || headerTwos.contains("Reproducibility")
 				|| headerTwos.contains("Tester"))) {
-			headers.add("1-Cycle Test");
+//			headers.add("1-Cycle Test");
+			headers.add("Cycle Test");
 			for (String stepField : resultHeaders) {
 				headerTwos.add(stepField);
 				headers.add(" ");
@@ -525,65 +539,62 @@ public class ExcelUtil {
 	 * @param testCase
 	 * @throws APIException
 	 */
-	private boolean getTestResult(MKSCommand cmd, Map<String, String> testCase, List<Object> data, boolean mergerStep)
+	private boolean getTestResult(MKSCommand cmd, Map<String, String> testCase, List<Object> data, boolean mergerStep, Map<String,Object> resultMap)
 			throws APIException {
-		
-		List<Map<String, Object>> result = cmd.getResult(ExportApplicationUI.tsIds.get(0), testCase.get("ID"), "Test Case");
-		if (result != null && result.size() > 0) {
-			if (CycleTest < result.size()) {
-				CycleTest = result.size();
+		String caseID = testCase.get("ID");
+		if (resultMap != null && resultMap.size() > 0) {
+			if (CycleTest < resultMap.size()) {
+				CycleTest = resultMap.size();
 			}
 			int i = 1;
 			int step = resultHeaders.size() - 1;
 			if (startInteger < contentHeaders.size()) {
 				startInteger = contentHeaders.size();
 			}
-			String mergeName = "-Cycle Test";
+			String mergeName = "Cycle Test";
 			if (!mergerStep)
 				mergeName = " Cycle Test Report";
 			int testEnvironIndex = headers.indexOf("Test Environment");
-			for (Map<String, Object> map : result) {
-				int testerIndex = 0;
-				int testDateIndex = 0;
-				for (String field : resultHeaders) {
-					String realField = resultHeaderMap.get(field);
-//					System.out.println("+++++++++++++++++++++++++++:"+realField);
-					data.add(map.get(realField));
-					if ("Tester".equals(field)) {
-						testerIndex = data.size() - 1;
-					}
-					if ("Date of Test".equals(field) || "Test Date".equals(field)) {
-						testDateIndex = data.size() - 1;
-					}
+			int testerIndex = 0;
+			int testDateIndex = 0;
+			for (String field : resultHeaders) {
+				String realField = resultHeaderMap.get(field);
+				// System.out.println("+++++++++++++++++++++++++++:"+realField);
+				data.add(resultMap.get(realField));
+				if ("Tester".equals(field)) {
+					testerIndex = data.size() - 1;
 				}
-
-				// 查询Test Session
-			
-				Map<String, String> sessionmap = ExportApplicationUI.sessionMap;
-				data.set(testerIndex, cmd.getUserNames(sessionmap.get("Assigned Users")));
-				if (resultHeaders.contains("Test Date") || resultHeaders.contains("Date of Test")) {
-					data.set(testDateIndex, sessionmap.get("Actual End Date"));
+				if ("Date of Test".equals(field) || "Test Date".equals(field)) {
+					testDateIndex = data.size() - 1;
 				}
-				if (testEnvironIndex > -1) {
-					data.set(testEnvironIndex, sessionmap.get("Test Environment"));
-				}
-
-				if (inputCountMap.get(i + mergeName) == null) {
-					headers.add(i + mergeName);
-					for (int m = 0; m < step; m++) {
-						headers.add("-");
-					}
-					for (String field : resultHeaders) {
-						headerTwos.add(field);// 加二级标题
-					}
-					CellRangeAddress input = new CellRangeAddress(0, 0, startInteger, startInteger + step);
-					cellList.add(input);
-					startInteger = startInteger + step + 1;
-					inputCountMap.put((i) + mergeName, "Result");
-				}
-				i++;
 			}
-		} // result
+
+			// 查询Test Session
+
+			Map<String, String> sessionmap = ExportApplicationUI.sessionMap;
+			data.set(testerIndex, cmd.getUserNames(sessionmap.get("Assigned Users")));
+			if (resultHeaders.contains("Test Date") || resultHeaders.contains("Date of Test")) {
+				data.set(testDateIndex, sessionmap.get("Actual End Date"));
+			}
+			if (testEnvironIndex > -1) {
+				data.set(testEnvironIndex, sessionmap.get("Test Environment"));
+			}
+
+			if (inputCountMap.get(i + mergeName) == null) {
+				headers.add( mergeName);
+				for (int m = 0; m < step; m++) {
+					headers.add("-");
+				}
+				for (String field : resultHeaders) {
+					headerTwos.add(field);// 加二级标题
+				}
+				CellRangeAddress input = new CellRangeAddress(0, 0, startInteger, startInteger + step);
+				cellList.add(input);
+				startInteger = startInteger + step + 1;
+				inputCountMap.put((i) + mergeName, "Result");
+			}
+			i++;
+		}
 		return false;
 
 	}

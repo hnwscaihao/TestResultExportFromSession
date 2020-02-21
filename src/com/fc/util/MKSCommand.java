@@ -806,17 +806,17 @@ public class MKSCommand {
 	}
 
 
-	public List<Map<String, Object>> getResult(String sessionID, String suiteID, String type) throws APIException {
+	public List<Map<String, Object>> getResult(String sessionID, String suiteID) throws APIException {
 		List<Map<String, Object>> result = new ArrayList<>();
 		SelectionList list = new SelectionList();
 		Command cmd = new Command("tm", "results");
 		
-		cmd.addOption(new Option("sessionID", sessionID));
-//		if (type.equals("Test Suite")) {
-		cmd.addOption(new Option("caseID", suiteID));
-//		} else if (type.equals("Test Case")) {
-//			cmd.addSelection(sessionID);
-//		}
+		if(sessionID != null && !"".equals(sessionID)){
+			cmd.addOption(new Option("sessionID", sessionID));
+		}
+		if(suiteID != null && !"".equals(suiteID)){
+			cmd.addOption(new Option("caseID", suiteID));
+		}
 		List<String> fields = new ArrayList<>();
 		fields.add("caseID");
 		fields.add("sessionID");
@@ -825,7 +825,6 @@ public class MKSCommand {
 		fields.add("Annotation");
 		fields.add("Result Serverity");
 		fields.add("Reproducibility");
-		
 		fields.add("SW Version");
 		fields.add("HW Result Version");
 
@@ -838,7 +837,7 @@ public class MKSCommand {
 		Option op = new Option("fields", mv);
 		cmd.addOption(op);
 		Response res = null;
-		if (type.equals("Test Suite")) {
+		try {
 			res = mksCmdRunner.execute(cmd);
 			WorkItemIterator wk = res.getWorkItems();
 			while (wk.hasNext()) {
@@ -846,33 +845,19 @@ public class MKSCommand {
 				WorkItem wi = wk.next();
 				for (String field : fields) {
 					Object value = wi.getField(field).getValue();
+					if (value instanceof Item) {
+						Item item = (Item) value;
+						value = item.getId();
+					}
+					if ("verdict".equals(field))
+						field = "verdictType";
 					map.put(field, value);
 				}
 				result.add(map);
 			}
-		} else if (type.equals("Test Case")) {
-			try {
-				res = mksCmdRunner.execute(cmd);
-				WorkItemIterator wk = res.getWorkItems();
-				while (wk.hasNext()) {
-					Map<String, Object> map = new HashMap<>();
-					WorkItem wi = wk.next();
-					for (String field : fields) {
-						Object value = wi.getField(field).getValue();
-						if(value instanceof Item){
-							Item item = (Item) value;
-							value = item.getId();
-						}
-						if("verdict".equals(field))
-							field = "verdictType";
-						map.put(field, value);
-					}
-					result.add(map);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
 		}
 		return result;
 	}

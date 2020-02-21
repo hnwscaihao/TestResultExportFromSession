@@ -172,15 +172,12 @@
 		<excelField  name="Test Case ID"  			type="Test Case"  			field="ID"					titleColor="A"/>
 		<excelField  name="Req ID"  				type="Test Case"  			field="Validates"			/>
 		<excelField  name="Priority"  				type="Test Case"  			field="Priority"			/>
-		<excelField  name="Req Context"  			type="Test Case"  			field="Req Context"			/>
 		<excelField  name="Req.Input"  				type="Test Case"  			field="Req.Input"			/>
 		<excelField  name="Req.Output"  			type="Test Case"  			field="Req.Output"			/>
 		<excelField  name="Req.Testability"  		type="Test Case"  			field="Req.Testability"		/>
 		<excelField  name="Test Case No."  			type="Test Case"  			field="Test Case No."		/>
-		<excelField  name="Test Case Source Type"  	type="Test Case"  			field="Test Case Source Type"		/>
-		<excelField  name="Test Type"  				type="Test Case"  			field="Test Type BMS"		/>
 		<excelField  name="Test case description"  	type="Test Case"  			field="Text"				/>
-		<excelField  name="Test Environment"  		type="Test Session"  		field=""	/>
+		<excelField  name="Test Environment"  		type="Test Session"  		field="Test Environment"	/>
 		<excelField  name="Precondition"  			type="Test Case"  			field="Precondition"		/>
 		<excelField  name="Test Step ID"  			type="Test Case"  			field="Test Steps"			/>
 		<excelField  name="Test Procedure"  	    type="Test Step"  			field="Test Procedure" 	      titleColor="C"/>

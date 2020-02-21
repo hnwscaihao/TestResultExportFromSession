@@ -62,7 +62,7 @@ public class ExportApplicationUI extends JFrame {
 	public static List<String> tsIds = new ArrayList<>();
 	public static List<String> caseIDList = new ArrayList<>();
 	public static final Logger logger = Logger.getLogger(ExportApplicationUI.class);
-	public static Map<String,String> sessionMap ;
+	public static Map<String,String> sessionMap ; // 直接查询session信息，保存起来，防止多次查询
 	JProgressBar progressBar;
 	private static final String EMPTY_IMPORT_TYPE = "Please Select a Type";
 	public static String exportType;
@@ -336,6 +336,7 @@ public class ExportApplicationUI extends JFrame {
 		} else {
 			ExportApplicationUI.logger.info("No ID was obtained!!! :" + issueCount); 
 		}
+		tsIds.add("9870");
 		if(tsIds.size()>1){
 			JOptionPane.showMessageDialog(null, "暂时不支持多选！","错误",0);
 			System.exit(0);
