@@ -53,7 +53,7 @@ import com.mks.api.response.APIException;
 
 @SuppressWarnings("all")
 public class ExcelUtil {
-	private static final String POST_CONFIG_FILE = "ExportMapping.xml";
+	private static final String CONFIG_FILE = "FieldMapping.xml";
 	private static final String CATEGORY_CONFIG_FILE = "Category.xml";
 	Map<String, List<Map<String, String>>> xmlConfig = new HashMap<>();
 	Map<String, List<String>> contentColumns = new HashMap<>();
@@ -114,7 +114,7 @@ public class ExcelUtil {
 		try {
 
 			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(ExcelUtil.class.getClassLoader().getResourceAsStream("ExportMapping.xml"));
+					.parse(ExcelUtil.class.getClassLoader().getResourceAsStream(CONFIG_FILE));
 			Element root = document.getDocumentElement();
 
 			if (root != null) {
