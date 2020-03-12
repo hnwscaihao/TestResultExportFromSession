@@ -299,7 +299,8 @@ public class ExportApplicationUI extends JFrame {
 		try {
 			String host = ExportApplicationUI.ENVIRONMENTVAR.get(Constants.MKSSI_HOST);
 			if(host==null || host.length()==0) {
-				host = "192.168.6.130";
+				//host = "192.168.6.130";
+				host = "192.168.229.133";
 			}
 			String portStr = ENVIRONMENTVAR.get(Constants.MKSSI_PORT);
 			Integer port = portStr!=null && !"".equals(portStr)? Integer.valueOf(portStr) : 7001;
@@ -336,7 +337,8 @@ public class ExportApplicationUI extends JFrame {
 		} else {
 			ExportApplicationUI.logger.info("No ID was obtained!!! :" + issueCount); 
 		}
-		tsIds.add("9870");
+		//tsIds.add("9870");
+		tsIds.add("21193");
 		if(tsIds.size()>1){
 			JOptionPane.showMessageDialog(null, "暂时不支持多选！","错误",0);
 			System.exit(0);

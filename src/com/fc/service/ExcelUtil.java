@@ -403,7 +403,8 @@ public class ExcelUtil {
 				importFields.add(field);
 			}
 		}
-		FIELD_TYPE_RECORD.putAll(cmd.getAllFieldType(importFields, PICK_FIELD_RECORD));
+		FIELD_TYPE_RECORD.putAll(cmd.getAllFieldType(importFields, PICK_FIELD_RECORD));//查询字段类型
+		FIELD_TYPE_RECORD.putAll(cmd.getTestVerdict(PICK_FIELD_RECORD));//查询测试结论
 		replaceLogid(cmd);// logid 替换为FullName(工号)
 
 		String trueType = ExportApplicationUI.trueType;
@@ -520,6 +521,7 @@ public class ExcelUtil {
 				if (!resultHeaders.contains(fieldName))
 					resultHeaders.add(fieldName);
 				resultHeaderMap.put(fieldName, field);
+				HEADER_MAP.put(fieldName, field);
 			} else {
 				if (!contentHeaders.contains(fieldName)) {
 					contentHeaders.add(fieldName);

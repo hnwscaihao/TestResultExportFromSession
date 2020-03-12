@@ -918,7 +918,29 @@ public class MKSCommand {
 		}
 		return fieldTypeMap;
 	}
-	
+//获取测试结论
+	public Map<String,String> getTestVerdict(  Map<String,List<String>> PICK_FIELD_RECORD) throws APIException{
+		Map<String,String> fieldTypeMap = new HashMap<String,String>();
+		Command cmd = new Command("tm", "verdicts");
+		Response res=null;
+		try {
+			res = mksCmdRunner.execute(cmd);
+			List<String> pickVals = new ArrayList<>();
+			if (res != null) {
+				WorkItemIterator it = res.getWorkItems();
+				while (it.hasNext()) {
+					WorkItem wi = it.next();
+					pickVals.add(wi.toString());
+				}
+			}
+			PICK_FIELD_RECORD.put("verdictType", pickVals);
+			fieldTypeMap.put("verdictType", "pick");
+		} catch (APIException e) {
+			e.printStackTrace();
+		}
+		return fieldTypeMap;
+	}
+
 	/**
 	 * Description 查询所有Projects
 	 * @return
