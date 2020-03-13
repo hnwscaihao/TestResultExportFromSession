@@ -370,7 +370,7 @@ public class MKSCommand {
 			m.put("Test Case Name","21");
 			m.put("Observed Result","22");
 			m.put("Comment","23");
-			m.put("Result Serverity","24");
+			//m.put("Result Serverity","24");
 			m.put("SW Version","25");
 			m.put("Tester","hhhh");
 			m.put("Actual End Date","26");
@@ -823,7 +823,7 @@ public class MKSCommand {
 		fields.add("verdict");
 		fields.add("Observed Result");
 		fields.add("Annotation");
-		fields.add("Result Serverity");
+		//fields.add("Result Serverity");
 		fields.add("Reproducibility");
 		fields.add("SW Version");
 		fields.add("HW Result Version");
@@ -851,14 +851,17 @@ public class MKSCommand {
 					}
 					if ("verdict".equals(field))
 						field = "verdictType";
+					ExportApplicationUI.logger.info("field : value--------------------"+field +" : "+value);
 					map.put(field, value);
 				}
 				result.add(map);
 			}
 		} catch (Exception e) {
+			ExportApplicationUI.logger.info(" --------------------"+e.getMessage());
 			e.printStackTrace();
 
 		}
+
 		return result;
 	}
 	

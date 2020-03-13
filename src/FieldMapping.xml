@@ -25,7 +25,7 @@
 		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>
+<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
 		<excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/>
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
@@ -69,7 +69,7 @@
 		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>
+<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
 		<excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/>
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
@@ -99,7 +99,7 @@
 		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>
+<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
 		<excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/>
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
@@ -147,7 +147,7 @@
 		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>
+<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
 		<excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/>
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
@@ -187,7 +187,7 @@
 		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>
+<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
 		<excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/>
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>

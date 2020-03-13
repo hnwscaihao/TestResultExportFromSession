@@ -312,10 +312,12 @@ public class ExcelUtil {
 				startInteger = maxLength;
 			}
 		}
-
 		if (hasResultField) {// 含有测试结果列
 			//根据testSessionID，一次将测试结果信息全部查出来
+			ExportApplicationUI.logger.info("ididididi 317--------------------"+ExportApplicationUI.tsIds.get(0));
 			List<Map<String, Object>> resultList = cmd.getResult(ExportApplicationUI.tsIds.get(0), null);
+			ExportApplicationUI.logger.info("resultList 318--------------------"+resultList);
+
 			//将测试结果信息记录到map中
 			Map<String,Map<String,Object>> resultRecordMap = new HashMap<>();
 			if(resultList != null && !resultList.isEmpty()){
@@ -325,6 +327,7 @@ public class ExcelUtil {
 					resultRecordMap.put(caseID, resultMap);
 				}
 			}
+			ExportApplicationUI.logger.info("resultRecordMap 327--------------------"+resultRecordMap);
 			for (int k = 0; k < testCaseItem.size(); k++) {
 				Map<String, String> testCase = testCaseItem.get(k);
 				List<Object> data = datas.get(k);
@@ -333,27 +336,31 @@ public class ExcelUtil {
 					data.add("");
 				}
 				boolean needResult = true;
+				ExportApplicationUI.logger.info("判断是否有父子结构--------------------"+parentStructure);
 				if (parentStructure) {// 有父子级结构
 					String structureVal = (String) data.get(parentIndex);
 																			// 导出，P
 																			// 结构且有子级不导出测试结果
 					String containValue = testCase.get("Contains");
+					ExportApplicationUI.logger.info("判断是否查询test result1--------------------"+structureVal+":"+containValue);
 					if ("P".equals(structureVal) && containValue != null && !"".equals(containValue)) {
+						ExportApplicationUI.logger.info("判断是否查询test result3--------------------false");
 						needResult = false;
 					}
 				}
-				
+				ExportApplicationUI.logger.info("data 349---"+data);
 				if (needResult) {// P 结构且有子级不导出测试结果；否则，都导出测试结果
+					ExportApplicationUI.logger.info("查询test result--------------------true");
 					String caseID = testCase.get("ID");
+					ExportApplicationUI.logger.info("caseID 351--------------------"+caseID);
 					getTestResult(cmd, testCase, data, mergerStep,resultRecordMap.get(caseID));
 				}
+				ExportApplicationUI.logger.info("data 355---"+data);
 			}
 		}
 
 		listHeaders.add(headers);// 添加完第一行标题
 		listHeaders.add(headerTwos);// 添加完第二行标题
-
-
 		if (hasResultField && !(headerTwos.contains("Severity") || headerTwos.contains("Reproducibility")
 				|| headerTwos.contains("Tester"))) {
 //			headers.add("1-Cycle Test");
@@ -408,6 +415,7 @@ public class ExcelUtil {
 		replaceLogid(cmd);// logid 替换为FullName(工号)
 
 		String trueType = ExportApplicationUI.trueType;
+
 		/** 获取 Pick 值信息 */
 		Workbook wookbook = GenerateXmlUtil.exportComplexExcel(listHeaders, datas, needMoreWidthField, trueType,
 				cellList, exportType);
@@ -544,6 +552,7 @@ public class ExcelUtil {
 	private boolean getTestResult(MKSCommand cmd, Map<String, String> testCase, List<Object> data, boolean mergerStep, Map<String,Object> resultMap)
 			throws APIException {
 		String caseID = testCase.get("ID");
+		ExportApplicationUI.logger.info("resultMap 550---"+resultMap);
 		if (resultMap != null && resultMap.size() > 0) {
 			if (CycleTest < resultMap.size()) {
 				CycleTest = resultMap.size();
