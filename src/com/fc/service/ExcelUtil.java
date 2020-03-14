@@ -315,7 +315,13 @@ public class ExcelUtil {
 		if (hasResultField) {// 含有测试结果列
 			//根据testSessionID，一次将测试结果信息全部查出来
 			ExportApplicationUI.logger.info("ididididi 317--------------------"+ExportApplicationUI.tsIds.get(0));
-			List<Map<String, Object>> resultList = cmd.getResult(ExportApplicationUI.tsIds.get(0), null);
+			List<String> resultFields = new ArrayList<String>();
+			for(String resultHeader : resultHeaders){
+				String resultField = resultHeaderMap.get(resultHeader);
+				if(resultField!=null && !"".equals(resultField))
+					resultFields.add(resultField);
+			}
+			List<Map<String, Object>> resultList = cmd.getResult(ExportApplicationUI.tsIds.get(0), null, resultFields);
 			ExportApplicationUI.logger.info("resultList 318--------------------"+resultList);
 
 			//将测试结果信息记录到map中
@@ -572,24 +578,9 @@ public class ExcelUtil {
 				String realField = resultHeaderMap.get(field);
 				// System.out.println("+++++++++++++++++++++++++++:"+realField);
 				data.add(resultMap.get(realField));
-				if ("Tester".equals(field)) {
-					testerIndex = data.size() - 1;
-				}
-				if ("Date of Test".equals(field) || "Test Date".equals(field)) {
-					testDateIndex = data.size() - 1;
-				}
 			}
 
 			// 查询Test Session
-
-			Map<String, String> sessionmap = ExportApplicationUI.sessionMap;
-			data.set(testerIndex, cmd.getUserNames(sessionmap.get("Assigned Users")));
-			if (resultHeaders.contains("Test Date") || resultHeaders.contains("Date of Test")) {
-				data.set(testDateIndex, sessionmap.get("Actual End Date"));
-			}
-			if (testEnvironIndex > -1) {
-				data.set(testEnvironIndex, sessionmap.get("Test Environment"));
-			}
 
 			if (inputCountMap.get(i + mergeName) == null) {
 				headers.add( mergeName);

@@ -299,19 +299,19 @@ public class ExportApplicationUI extends JFrame {
 		try {
 			String host = ExportApplicationUI.ENVIRONMENTVAR.get(Constants.MKSSI_HOST);
 			if(host==null || host.length()==0) {
-//				host = "192.168.6.130";
+				host = "192.168.6.130";
 //				host = "192.168.229.133";
-				host = "10.255.33.189";
+//				host = "10.255.33.189";
 			}
 			String portStr = ENVIRONMENTVAR.get(Constants.MKSSI_PORT);
 			Integer port = portStr!=null && !"".equals(portStr)? Integer.valueOf(portStr) : 7001;
 			String defaultUser = ENVIRONMENTVAR.get(Constants.MKSSI_USER);
 			String pwd = "";
 			if(defaultUser == null || "".equals(defaultUser) ){
-				defaultUser = "GW00165407";
-				pwd = "123369";
-//				defaultUser = "admin";
-//				pwd = "admin";
+//				defaultUser = "GW00165407";
+//				pwd = "123369";
+				defaultUser = "admin";
+				pwd = "admin";
 			}
 			logger.info("host:" + host+"; defaultUser:"+defaultUser+"; pwd:"+pwd);
 			cmd = new MKSCommand(host, 7001, defaultUser, pwd, 4, 16);
@@ -341,7 +341,7 @@ public class ExportApplicationUI extends JFrame {
 			ExportApplicationUI.logger.info("No ID was obtained!!! :" + issueCount); 
 		}
 //		tsIds.add("54118");
-//		tsIds.add("11206");
+		tsIds.add("9870");
 		if(tsIds.size()>1){
 			JOptionPane.showMessageDialog(null, "暂时不支持多选！","错误",0);
 			System.exit(0);
