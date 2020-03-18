@@ -314,19 +314,15 @@ public class ExcelUtil {
 		}
 		if (hasResultField) {// 含有测试结果列
 			//根据testSessionID，一次将测试结果信息全部查出来
-<<<<<<< HEAD
-			List<Map<String, Object>> resultList = cmd.getResult(ExportApplicationUI.tsIds.get(0), null);
-=======
-			ExportApplicationUI.logger.info("ididididi 317--------------------"+ExportApplicationUI.tsIds.get(0));
-			List<String> resultFields = new ArrayList<String>();
+			List<String> resultFields = new ArrayList<>();
 			for(String resultHeader : resultHeaders){
 				String resultField = resultHeaderMap.get(resultHeader);
-				if(resultField!=null && !"".equals(resultField))
+				if(resultField!=null && "".equals(resultField)){
 					resultFields.add(resultField);
+				}
 			}
 			List<Map<String, Object>> resultList = cmd.getResult(ExportApplicationUI.tsIds.get(0), null, resultFields);
 			ExportApplicationUI.logger.info("resultList 318--------------------"+resultList);
->>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 
 			//将测试结果信息记录到map中
 			Map<String,Map<String,Object>> resultRecordMap = new HashMap<>();
