@@ -806,7 +806,7 @@ public class MKSCommand {
 	}
 
 
-	public List<Map<String, Object>> getResult(String sessionID, String suiteID) throws APIException {
+	public List<Map<String, Object>> getResult(String sessionID, String suiteID,List<String> fields) throws APIException {
 		List<Map<String, Object>> result = new ArrayList<>();
 		SelectionList list = new SelectionList();
 		Command cmd = new Command("tm", "results");
@@ -817,17 +817,12 @@ public class MKSCommand {
 		if(suiteID != null && !"".equals(suiteID)){
 			cmd.addOption(new Option("caseID", suiteID));
 		}
-		List<String> fields = new ArrayList<>();
-		fields.add("caseID");
-		fields.add("sessionID");
-		fields.add("verdict");
-		fields.add("Observed Result");
-		fields.add("Annotation");
-		//fields.add("Result Serverity");
-		fields.add("Reproducibility");
-		fields.add("SW Version");
-		fields.add("HW Result Version");
-
+		if(!fields.contains("sessionID")){
+			fields.add("sessionID");
+		}
+		if(!fields.contains("caseID")){
+			fields.add("caseID");
+		}
 		
 		MultiValue mv = new MultiValue();
 		mv.setSeparator(",");
@@ -859,7 +854,6 @@ public class MKSCommand {
 		} catch (Exception e) {
 			ExportApplicationUI.logger.info(" --------------------"+e.getMessage());
 			e.printStackTrace();
-
 		}
 
 		return result;

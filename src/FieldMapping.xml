@@ -26,11 +26,15 @@
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
+<<<<<<< HEAD
 		<excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
+=======
+		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
+>>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Actual End Date"			/>
+		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
 		
 		<excelField  name="System Engineer"  						type="Test Case"  		field="System Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
 		<excelField  name="System Engineer Review Result"  			type="Test Case"  		field="System Engineer Review Result"			onlyCreate="false"  overRide="true"/>
@@ -70,11 +74,15 @@
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
+<<<<<<< HEAD
         <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
+=======
+		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
+>>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Actual End Date"			/>
+		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
 	</importType>
 <!--	软件鉴定测试模板-->
 	<importType name="Software Qualification Test Specification" type="Test Suite" mergeStep="true" structure="false"><!-- Software Requirement Specification -->
@@ -100,11 +108,15 @@
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
+<<<<<<< HEAD
         <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
+=======
+		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
+>>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Actual End Date"			/>
+		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
 		
 		<excelField  name="System Engineer"  						type="Test Case"  		field="System Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
 		<excelField  name="System Engineer Review Result"  			type="Test Case"  		field="System Engineer Review Result"			onlyCreate="false"  overRide="true"/>
@@ -148,11 +160,15 @@
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
+<<<<<<< HEAD
         <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
+=======
+		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
+>>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Actual End Date"			/>
+		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
 		
 		<excelField  name="System Engineer"  						type="Test Case"  		field="System Engineer"							onlyCreate="false"  overRide="false"	titleColor="B"/>
 		<excelField  name="System Engineer Review Result"  			type="Test Case"  		field="System Engineer Review Result"			onlyCreate="false"  overRide="true"/>
@@ -188,11 +204,15 @@
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
+<<<<<<< HEAD
         <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
+=======
+		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
+>>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Actual End Date"			/>
+		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
 	</importType>
 
 	<!--新添加-->
