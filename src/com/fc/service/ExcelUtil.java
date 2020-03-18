@@ -314,9 +314,7 @@ public class ExcelUtil {
 		}
 		if (hasResultField) {// 含有测试结果列
 			//根据testSessionID，一次将测试结果信息全部查出来
-			ExportApplicationUI.logger.info("ididididi 317--------------------"+ExportApplicationUI.tsIds.get(0));
 			List<Map<String, Object>> resultList = cmd.getResult(ExportApplicationUI.tsIds.get(0), null);
-			ExportApplicationUI.logger.info("resultList 318--------------------"+resultList);
 
 			//将测试结果信息记录到map中
 			Map<String,Map<String,Object>> resultRecordMap = new HashMap<>();
@@ -327,7 +325,6 @@ public class ExcelUtil {
 					resultRecordMap.put(caseID, resultMap);
 				}
 			}
-			ExportApplicationUI.logger.info("resultRecordMap 327--------------------"+resultRecordMap);
 			for (int k = 0; k < testCaseItem.size(); k++) {
 				Map<String, String> testCase = testCaseItem.get(k);
 				List<Object> data = datas.get(k);
@@ -336,23 +333,18 @@ public class ExcelUtil {
 					data.add("");
 				}
 				boolean needResult = true;
-				ExportApplicationUI.logger.info("判断是否有父子结构--------------------"+parentStructure);
 				if (parentStructure) {// 有父子级结构
 					String structureVal = (String) data.get(parentIndex);
 																			// 导出，P
 																			// 结构且有子级不导出测试结果
 					String containValue = testCase.get("Contains");
-					ExportApplicationUI.logger.info("判断是否查询test result1--------------------"+structureVal+":"+containValue);
 					if ("P".equals(structureVal) && containValue != null && !"".equals(containValue)) {
-						ExportApplicationUI.logger.info("判断是否查询test result3--------------------false");
 						needResult = false;
 					}
 				}
 				ExportApplicationUI.logger.info("data 349---"+data);
 				if (needResult) {// P 结构且有子级不导出测试结果；否则，都导出测试结果
-					ExportApplicationUI.logger.info("查询test result--------------------true");
 					String caseID = testCase.get("ID");
-					ExportApplicationUI.logger.info("caseID 351--------------------"+caseID);
 					getTestResult(cmd, testCase, data, mergerStep,resultRecordMap.get(caseID));
 				}
 				ExportApplicationUI.logger.info("data 355---"+data);
