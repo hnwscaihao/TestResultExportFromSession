@@ -930,8 +930,8 @@ public class MKSCommand {
 					pickVals.add(wi.toString());
 				}
 			}
-			PICK_FIELD_RECORD.put("verdictType", pickVals);
-			fieldTypeMap.put("verdictType", "pick");
+			PICK_FIELD_RECORD.put("Verdict", pickVals);
+			fieldTypeMap.put("Verdict", "pick");
 		} catch (APIException e) {
 			e.printStackTrace();
 		}

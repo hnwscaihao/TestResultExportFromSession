@@ -342,7 +342,7 @@ public class ExportApplicationUI extends JFrame {
 			ExportApplicationUI.logger.info("No ID was obtained!!! :" + issueCount); 
 		}
 //		tsIds.add("54118");
-//		tsIds.add("11206");
+		tsIds.add("9870");
 		if(tsIds.size()>1){
 			JOptionPane.showMessageDialog(null, "暂时不支持多选！","错误",0);
 			System.exit(0);

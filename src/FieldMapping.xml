@@ -22,15 +22,12 @@
 		<excelField  name="Detection Method"  		type="Test Case"  			field="Detection Methods"				/>
 
 		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
+		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-<<<<<<< HEAD
 		<excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-=======
 		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
->>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
@@ -70,15 +67,12 @@
 		<excelField  name="Time Constraint"  		type="Test Step"  			field="Time Constraint"		  parentField="Call Depth"	titleColor="C"/>
 		<excelField  name="Output I/F &amp; Data"  	type="Test Step"  			field="Output I/F &amp; Data" parentField="Call Depth"	titleColor="C"/>
 		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
+		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-<<<<<<< HEAD
         <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-=======
 		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
->>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
@@ -104,15 +98,12 @@
 		<excelField  name="Expected Results"  		type="Test Case"  			field="Expected Results"	/>
 
 		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
+		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-<<<<<<< HEAD
         <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-=======
 		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
->>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
@@ -156,15 +147,12 @@
 		<excelField  name="Expected Output Data"  			type="Test Step"  			field="Expected Output Data"			parentField="Test Output"	titleColor="C"/>
 
 		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
+		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-<<<<<<< HEAD
         <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-=======
 		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
->>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
@@ -200,15 +188,12 @@
 		<excelField  name="Expected Results"  		type="Test Case"  			field="Expected Results"	/>
 
 		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="verdictType"				/>
+		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
 		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
 		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
 <!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-<<<<<<< HEAD
         <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-=======
 		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
->>>>>>> 1aaebf4b44885a12481ea3776b2096f4582c38a7
 		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
 		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
 		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
