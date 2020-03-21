@@ -410,8 +410,15 @@ public class ExcelUtil {
 				importFields.add(field);
 			}
 		}
+		List<String> resultFields = new ArrayList<String>();
+		for(String header : resultHeaders){
+			String field = resultHeaderMap.get(header);
+			if (!"-".equals(field)) 
+				resultFields.add(field);
+		}
 		FIELD_TYPE_RECORD.putAll(cmd.getAllFieldType(importFields, PICK_FIELD_RECORD));//查询字段类型
 		FIELD_TYPE_RECORD.putAll(cmd.getTestVerdict(PICK_FIELD_RECORD));//查询测试结论
+		FIELD_TYPE_RECORD.putAll(cmd.getAllResultFields(resultFields, PICK_FIELD_RECORD));//测试结果字段
 		replaceLogid(cmd);// logid 替换为FullName(工号)
 
 		String trueType = ExportApplicationUI.trueType;

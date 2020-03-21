@@ -915,7 +915,7 @@ public class MKSCommand {
 		}
 		return fieldTypeMap;
 	}
-//获取测试结论
+	//获取测试结论
 	public Map<String,String> getTestVerdict(  Map<String,List<String>> PICK_FIELD_RECORD) throws APIException{
 		Map<String,String> fieldTypeMap = new HashMap<String,String>();
 		Command cmd = new Command("tm", "verdicts");
@@ -937,6 +937,68 @@ public class MKSCommand {
 		}
 		return fieldTypeMap;
 	}
+	
+	/**
+	 * Description 获取所有测试结果Field 类型，并把Pick值预先取出
+	 * 
+	 * @param fields
+	 * @param PICK_FIELD_RECORD
+	 * @return
+	 * @throws APIException
+	 */
+	public Map<String, String> getAllResultFields(List<String> fields, Map<String, List<String>> PICK_FIELD_RECORD)
+			throws APIException {
+		Map<String, String> fieldTypeMap = new HashMap<String, String>();
+		fields.remove("sessionID");
+		fields.remove("Verdict");
+		fields.remove("verdictType");
+		Command cmd = new Command("tm", "resultfields");
+		cmd.addOption(new Option("fields", "picks,type"));
+		for (String field : fields) {
+			if (field != null && field.length() > 0) {
+				cmd.addSelection(field);
+			}
+		}
+		Response res = null;
+		try {
+			res = mksCmdRunner.execute(cmd);
+		} catch (APIException e) {
+
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+
+		if (res != null) {
+			WorkItemIterator it = res.getWorkItems();
+			while (it.hasNext()) {
+				WorkItem wi = it.next();
+				String field = wi.getId();
+				String fieldType = wi.getField("Type").getValueAsString();
+				if ("pick".equals(fieldType)) {
+					Field picks = wi.getField("picks");
+					ItemList itemList = (ItemList) picks.getList();
+					if (itemList != null) {
+						List<String> pickVals = new ArrayList<String>();
+						for (int i = 0; i < itemList.size(); i++) {
+							Item item = (Item) itemList.get(i);
+							String visiblePick = item.getId();
+							Field attribute = item.getField("active");
+							if (attribute != null && attribute.getValueAsString().equalsIgnoreCase("true")
+									&& !pickVals.contains(visiblePick)) {
+								pickVals.add(visiblePick);
+							}
+						}
+						PICK_FIELD_RECORD.put(field, pickVals);
+					}
+				} else if ("fva".equals(fieldType)) {
+
+				}
+				fieldTypeMap.put(field, fieldType);
+			}
+		}
+		return fieldTypeMap;
+	}
+
 
 	/**
 	 * Description 查询所有Projects
