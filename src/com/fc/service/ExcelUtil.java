@@ -317,7 +317,7 @@ public class ExcelUtil {
 			List<String> resultFields = new ArrayList<>();
 			for(String resultHeader : resultHeaders){
 				String resultField = resultHeaderMap.get(resultHeader);
-				if(resultField!=null && "".equals(resultField)){
+				if(resultField!=null && !"".equals(resultField)){
 					resultFields.add(resultField);
 				}
 			}
