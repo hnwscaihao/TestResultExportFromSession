@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="TestObReport:jar" />
+      <artifact name="GuanqiTestResultExport:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
@@ -11,6 +11,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -26,9 +29,6 @@
     <expand />
     <select />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="TestObReport" />
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -36,23 +36,93 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GuanqiTestResultImport" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
-  <component name="RunManager" selected="Application.TestObjReportUI">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\lxg\workProject\guang qi\TestResultExportFromSession\lib" />
+      <recent name="F:\lxg\workProject\guang qi\TestResultExportFromSession\src\com\fc" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.fc.util" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\lxg\workProject\guang qi\TestResultExportFromSession\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ExportApplicationUI">
+    <configuration name="AnalysisXML" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.fc.util.AnalysisXML" />
+      <module name="GuanqiTestResultExport" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fc.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExcelUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.fc.service.ExcelUtil" />
+      <module name="GuanqiTestResultExport" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fc.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExportApplicationUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.fc.ui.ExportApplicationUI" />
+      <module name="GuanqiTestResultExport" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fc.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MyRunnable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.fc.service.MyRunnable" />
+      <module name="GuanqiTestResultExport" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fc.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestObjReportUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.gw.ui.TestObjReportUI" />
-      <module name="TestObReport" />
+      <module name="GuanqiTestResultExport" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.gw.ui.*" />
@@ -63,37 +133,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestParse" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.gw.test.TestParse" />
-      <module name="TestObReport" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.gw.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ExportApplicationUI" />
+        <item itemvalue="Application.MyRunnable" />
+        <item itemvalue="Application.AnalysisXML" />
+        <item itemvalue="Application.ExcelUtil" />
         <item itemvalue="Application.TestObjReportUI" />
-        <item itemvalue="Application.TestParse" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>C:\Users\dell\AppData\Roaming\Subversion</configuration>
@@ -131,119 +179,97 @@
       <workItem from="1580866293413" duration="3338000" />
       <workItem from="1580960060908" duration="4608000" />
       <workItem from="1581040140235" duration="662000" />
+      <workItem from="1584607773399" duration="937000" />
+      <workItem from="1584618331906" duration="64000" />
+      <workItem from="1584618410836" duration="32000" />
+      <workItem from="1589083235126" duration="383000" />
+      <workItem from="1589083851180" duration="4687000" />
+      <workItem from="1590829606322" duration="1113000" />
+      <workItem from="1590830784665" duration="2561000" />
+      <workItem from="1590993226494" duration="73000" />
+      <workItem from="1591016342967" duration="5000" />
+      <workItem from="1591195952408" duration="137000" />
+      <workItem from="1591666288639" duration="38000" />
+      <workItem from="1595292140721" duration="903000" />
+      <workItem from="1599440455981" duration="6100000" />
+      <workItem from="1599453190960" duration="3386000" />
+      <workItem from="1599795732491" duration="17049000" />
+      <workItem from="1600062816707" duration="8685000" />
+      <workItem from="1600132763469" duration="26077000" />
+      <workItem from="1600219053868" duration="69000" />
+      <workItem from="1600219158941" duration="18142000" />
+      <workItem from="1600307510503" duration="8480000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="488" y="79" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog" timestamp="1579500702611">
+    <state x="451" y="156" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1600235558425">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="79" key="#com.intellij.ide.ui.customization.CustomizableActionsPanel.FindAvailableActionsDialog/0.0.1366.728@0.0.1366.728" timestamp="1579500702611" />
-    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1580131849561">
+    <state x="451" y="156" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1600235558425" />
+    <state width="499" height="466" key="DebuggerActiveHint" timestamp="1600248435780">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1580131849561" />
-    <state x="413" y="154" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1579597329829">
+    <state width="499" height="466" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1600248435780" />
+    <state x="463" y="122" key="FileChooserDialogImpl" timestamp="1600332243929">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="154" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1579597329829" />
-    <state x="534" y="256" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1579425330289">
+    <state x="463" y="122" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1600332243929" />
+    <state width="1323" height="144" key="GridCell.Tab.0.bottom" timestamp="1600310283756">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="534" y="256" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1579425330289" />
-    <state x="413" y="122" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1579498078769">
+    <state width="1323" height="144" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1600310283756" />
+    <state width="1323" height="144" key="GridCell.Tab.0.center" timestamp="1600310283756">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="122" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1366.728@0.0.1366.728" timestamp="1579498078769" />
-    <state x="438" y="72" key="#xdebugger.evaluate" timestamp="1580722436494">
+    <state width="1323" height="144" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1600310283756" />
+    <state width="1323" height="144" key="GridCell.Tab.0.left" timestamp="1600310283756">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="438" y="72" key="#xdebugger.evaluate/0.0.1366.728@0.0.1366.728" timestamp="1580722436494" />
-    <state x="442" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1580786176867">
+    <state width="1323" height="144" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1600310283756" />
+    <state width="1323" height="144" key="GridCell.Tab.0.right" timestamp="1600310283756">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="442" y="277" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1580786176867" />
-    <state width="486" height="680" key="DebuggerActiveHint" timestamp="1580793896362">
+    <state width="1323" height="144" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1600310283756" />
+    <state width="1323" height="144" key="GridCell.Tab.1.bottom" timestamp="1600310283757">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="486" height="680" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1580793896362" />
-    <state x="463" y="122" key="FileChooserDialogImpl" timestamp="1581040200850">
+    <state width="1323" height="144" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1600310283757" />
+    <state width="1323" height="144" key="GridCell.Tab.1.center" timestamp="1600310283757">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="122" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1581040200850" />
-    <state width="1323" height="161" key="GridCell.Tab.0.bottom" timestamp="1580870866539">
+    <state width="1323" height="144" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1600310283757" />
+    <state width="1323" height="144" key="GridCell.Tab.1.left" timestamp="1600310283756">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="161" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
-    <state width="1323" height="161" key="GridCell.Tab.0.center" timestamp="1580870866539">
+    <state width="1323" height="144" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1600310283756" />
+    <state width="1323" height="144" key="GridCell.Tab.1.right" timestamp="1600310283757">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="161" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
-    <state width="1323" height="161" key="GridCell.Tab.0.left" timestamp="1580870866539">
+    <state width="1323" height="144" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1600310283757" />
+    <state x="202" y="6" width="1038" height="722" key="SettingsEditor" timestamp="1600332235133">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="161" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
-    <state width="1323" height="161" key="GridCell.Tab.0.right" timestamp="1580870866539">
+    <state x="202" y="6" width="1038" height="722" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1600332235133" />
+    <state x="283" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600237843971">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="161" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
-    <state width="1323" height="161" key="GridCell.Tab.1.bottom" timestamp="1580870866549">
+    <state x="283" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1600237843971" />
+    <state x="384" y="96" width="598" height="536" key="find.popup" timestamp="1600238789409">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="161" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1580870866549" />
-    <state width="1323" height="161" key="GridCell.Tab.1.center" timestamp="1580870866549">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="161" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1580870866549" />
-    <state width="1323" height="161" key="GridCell.Tab.1.left" timestamp="1580870866549">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="161" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1580870866539" />
-    <state width="1323" height="161" key="GridCell.Tab.1.right" timestamp="1580870866549">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="161" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1580870866549" />
-    <state x="165" y="6" width="1038" height="722" key="SettingsEditor" timestamp="1580275351511">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="165" y="6" width="1038" height="722" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1580275351511" />
-    <state x="404" y="105" width="549" height="524" key="StructurePopup" timestamp="1580788575804">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="404" y="105" width="549" height="524" key="StructurePopup/0.0.1366.728@0.0.1366.728" timestamp="1580788575804" />
-    <state x="522" y="366" width="342" height="244" key="classpath-attribute-editor" timestamp="1579597361408">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="522" y="366" width="342" height="244" key="classpath-attribute-editor/0.0.1366.728@0.0.1366.728" timestamp="1579597361408" />
-    <state x="540" y="301" key="com.intellij.ide.ui.customization.CustomizableActionsPanel$EditIconDialog" timestamp="1579500937231">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="540" y="301" key="com.intellij.ide.ui.customization.CustomizableActionsPanel$EditIconDialog/0.0.1366.728@0.0.1366.728" timestamp="1579500937231" />
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog" timestamp="1581040143599">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="0" y="0" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1581040143599" />
-    <state x="370" y="119" width="626" height="490" key="find.popup" timestamp="1580967740433">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="370" y="119" width="626" height="490" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1580967740433" />
-    <state x="115" y="74" key="new project wizard" timestamp="1580186035011">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="115" y="74" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1580186035011" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1580969410085">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1580969410085" />
-    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1580969414748">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1580969414748" />
+    <state x="384" y="96" width="598" height="536" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1600238789409" />
   </component>
   <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo typeName="com.sun.org.apache.xerces.internal.dom.DeepNodeListImpl" fieldName="nodes" />
+        <PinnedItemInfo typeName="com.sun.org.apache.xerces.internal.dom.DeferredElementImpl" fieldName="ownerDocument" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="this.xmlConfig" language="JAVA" />

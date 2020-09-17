@@ -237,41 +237,45 @@ public class GenerateXmlUtil {
 		HSSFWorkbook work = new HSSFWorkbook();
 		HSSFSheet sheet = work.createSheet(name);
 		sheet.autoSizeColumn(1, true);
-		List<String> headers = listHeaders.get(0);
-		List<String> headers2 = listHeaders.size() > 1 ? listHeaders.get(1) : new ArrayList<String>();
-		for (int i = 0; i < headers.size(); i++) {
-			String header = headers.get(i);
-			String field = ExcelUtil.HEADER_MAP.get(header);
-			String fieldType = ExcelUtil.FIELD_TYPE_RECORD.get(field);
-			if ("longtext".equals(fieldType) || "Text".equals(field)) {
-				sheet.setColumnWidth(i, 9000);
-			} else if (field != null) {
-				int headerLength = header.length();
-				int colWidth = headerLength / 3 * 1000;
-				colWidth = colWidth >= 3000 ? colWidth : 3000;// 最小宽度 2000
-				sheet.setColumnWidth(i, colWidth);
-			}
-		}
-		if (!needMoreWidthField.isEmpty()) {
-			for (String field : needMoreWidthField) {
-				int realIndex = 0;
-				List<String> subList = new ArrayList<String>(headers2);
-				int index = headers2.indexOf(field);
-				while (index > -1) {
-					realIndex = realIndex + index;
-					subList = subList.subList(index + 1, subList.size());// 把当前位置截掉
-					sheet.setColumnWidth(realIndex, 9000);
-					realIndex = realIndex + 1;// 多截一个位置，补上
-					index = subList.indexOf(field);
-				}
-			}
-		}
+
+
+//		List<String> headers = listHeaders.get(18);
+//		List<String> headers2 = listHeaders.size() > 1 ? listHeaders.get(1) : new ArrayList<String>();
+//		for (int i = 0; i < headers.size(); i++) {
+//			String header = headers.get(i);
+//			String field = ExcelUtil.HEADER_MAP.get(header);
+//			String fieldType = ExcelUtil.FIELD_TYPE_RECORD.get(field);
+//			if ("longtext".equals(fieldType) || "Text".equals(field)) {
+//				sheet.setColumnWidth(i, 9000);
+//			} else if (field != null) {
+//				int headerLength = header.length();
+//				int colWidth = headerLength / 3 * 1000;
+//				colWidth = colWidth >= 3000 ? colWidth : 3000;// 最小宽度 2000
+//				sheet.setColumnWidth(i, colWidth);
+//			}
+//		}
+//		if (!needMoreWidthField.isEmpty()) {
+//			for (String field : needMoreWidthField) {
+//				int realIndex = 0;
+//				List<String> subList = new ArrayList<String>(headers2);
+//				int index = headers2.indexOf(field);
+//				while (index > -1) {
+//					realIndex = realIndex + index;
+//					subList = subList.subList(index + 1, subList.size());// 把当前位置截掉
+//					sheet.setColumnWidth(realIndex, 9000);
+//					realIndex = realIndex + 1;// 多截一个位置，补上
+//					index = subList.indexOf(field);
+//				}
+//			}
+//		}
 
 		// 设置标题行格式
 		HSSFFont titleFont = work.createFont();
 		titleFont.setFontHeightInPoints((short) 10);// 字号
 		titleFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);// 加粗
-		//
+
+
+
 		// HSSFCellStyle titleStyle = work.createCellStyle();
 		// ExcelUtil.setBorder(titleStyle, true, true, true, true,
 		// HSSFCellStyle.BORDER_THIN);
@@ -284,19 +288,19 @@ public class GenerateXmlUtil {
 		// 可更改字段标题样式
 		HSSFCellStyle castTitleStyle = work.createCellStyle();
 		ExcelUtil.setBorder(castTitleStyle, true, true, true, true, HSSFCellStyle.BORDER_THIN);
-		castTitleStyle.setWrapText(true);
-		castTitleStyle.setFont(titleFont);
-		castTitleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-		castTitleStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-		castTitleStyle.setFillForegroundColor(IndexedColors.SKY_BLUE.getIndex());
-		castTitleStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		castTitleStyle.setWrapText(true); ////自动换行
+		castTitleStyle.setFont(titleFont);////设置字体名称
+		castTitleStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT); //靠左
+		castTitleStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
+		castTitleStyle.setFillForegroundColor(IndexedColors.SKY_BLUE.getIndex());//设置图案颜色
+		castTitleStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);//设置图案样式
 
 		// 不可更改字段标题样式(系统字段)
 		HSSFCellStyle unalterTitleStyle = work.createCellStyle();
 		ExcelUtil.setBorder(unalterTitleStyle, true, true, true, true, HSSFCellStyle.BORDER_THIN);
 		unalterTitleStyle.setWrapText(true);
 		unalterTitleStyle.setFont(titleFont);
-		unalterTitleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		unalterTitleStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
 		unalterTitleStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
 		unalterTitleStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
 		unalterTitleStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
@@ -306,7 +310,7 @@ public class GenerateXmlUtil {
 		ExcelUtil.setBorder(updateTitleStyle, true, true, true, true, HSSFCellStyle.BORDER_THIN);
 		updateTitleStyle.setWrapText(true);
 		updateTitleStyle.setFont(titleFont);
-		updateTitleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		updateTitleStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
 		updateTitleStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
 		updateTitleStyle.setFillForegroundColor(IndexedColors.LAVENDER.getIndex());
 		updateTitleStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
@@ -347,6 +351,28 @@ public class GenerateXmlUtil {
 		// 插入表格内容数据
 		GenerateXmlUtil.addData(listHeaders, datas, null, work, sheet, contentStyle, null, passStyle, failStyle);
 
+		sheet.setColumnWidth(1, 31 * 256);
+		sheet.setColumnWidth(3, 31 * 256);
+		sheet.setColumnWidth(9, 31 * 256);
+		//隐藏标题
+		sheet.getRow(0).setZeroHeight(true);
+		sheet.getRow(1).setZeroHeight(true);
+		sheet.getRow(2).setZeroHeight(true);
+		sheet.getRow(3).setZeroHeight(true);
+		sheet.getRow(4).setZeroHeight(true);
+		sheet.getRow(5).setZeroHeight(true);
+		sheet.getRow(6).setZeroHeight(true);
+		sheet.getRow(7).setZeroHeight(true);
+		sheet.getRow(8).setZeroHeight(true);
+		sheet.getRow(9).setZeroHeight(true);
+		sheet.getRow(10).setZeroHeight(true);
+		sheet.getRow(11).setZeroHeight(true);
+		sheet.getRow(12).setZeroHeight(true);
+		sheet.getRow(13).setZeroHeight(true);
+		sheet.getRow(14).setZeroHeight(true);
+		sheet.getRow(15).setZeroHeight(true);
+		sheet.getRow(16).setZeroHeight(true);
+		sheet.getRow(17).setZeroHeight(true);
 		return work;
 	}
 
@@ -503,6 +529,7 @@ public class GenerateXmlUtil {
 			} else {
 				// 设置默认行高
 				sheet.setDefaultRowHeightInPoints(20);
+
 			}
 			for (int i = 0, j = data.size(); i < j; i++) {
 				HSSFCell cell = row.createCell(i);

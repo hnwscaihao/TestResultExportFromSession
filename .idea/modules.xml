@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TestObReport.iml" filepath="$PROJECT_DIR$/TestObReport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GuanqiTestResultExport.iml" filepath="$PROJECT_DIR$/GuanqiTestResultExport.iml" />
     </modules>
   </component>
 </project>

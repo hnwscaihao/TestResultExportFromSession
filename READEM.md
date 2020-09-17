@@ -10,3 +10,4 @@
 1. 在Integrity界面中选择一条或几条Test Objective<br/>
 2. 在Custom中选择Test Objective/Session Report菜单进行导出<br/>
 
+2020-5-10

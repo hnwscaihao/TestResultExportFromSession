@@ -276,7 +276,7 @@ public class MKSCommand {
 	 * @return
 	 * @throws APIException
 	 */
-	public List<Map<String, String>> getRequstTestById(String id, List<String> fields) throws APIException {
+	public List<Map<String, String>> getRequstTestById(String id, List<String> fields)  {
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		Command cmd = new Command("tm", "results");
 		MultiValue mv = new MultiValue();
@@ -287,7 +287,7 @@ public class MKSCommand {
 		Option op = new Option("fields", mv);
 		cmd.addOption(op);
 
-		Option op1 = new Option("sessionId", id);
+		Option op1 = new Option("sessionID", id);
 		cmd.addOption(op1);
 //		SelectionList sl = new SelectionList();
 //		sl.add(("sessionId="+id).trim());
@@ -312,7 +312,6 @@ public class MKSCommand {
 		} catch (APIException e) {
 			// success = false;
 			logger.error(e.getMessage());
-			throw e;
 		}
 		return list;
 	}
@@ -823,7 +822,7 @@ public class MKSCommand {
 		if(!fields.contains("caseID")){
 			fields.add("caseID");
 		}
-		
+
 		MultiValue mv = new MultiValue();
 		mv.setSeparator(",");
 		for (String field : fields) {
@@ -858,7 +857,7 @@ public class MKSCommand {
 
 		return result;
 	}
-	
+
 	/**
 	 * Description 获取所有Field 类型，并把Pick值预先取出
 	 * @param fields
@@ -1019,5 +1018,48 @@ public class MKSCommand {
 			}
 		}
 		return projects;
+	}
+
+	/**
+	 * 通过query查询数据
+	 * @param fields
+	 * @param query
+	 * @return
+	 * @throws APIException
+	 */
+	public List<Map<String,String>> queryIssueByQuery(List<String> fields, String query) throws APIException{
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		Command cmd = new Command("im", "issues");
+		MultiValue mv = new MultiValue();
+		mv.setSeparator(",");
+		for (String field : fields) {
+			mv.add(field);
+		}
+		Option op = new Option("fields", mv);
+		cmd.addOption(op);
+		cmd.addOption(new Option("queryDefinition",query));
+
+		Response res = null;
+		try {
+			res = mksCmdRunner.execute(cmd);
+			WorkItemIterator it = res.getWorkItems();
+			while (it.hasNext()) {
+				WorkItem wi = it.next();
+				Map<String, String> map = new HashMap<String, String>();
+				for (String field : fields) {
+					if (field.contains("::")) {
+						field = field.split("::")[0];
+					}
+					String value = wi.getField(field).getValueAsString();
+					map.put(field, value);
+				}
+				list.add(map);
+			}
+		} catch (APIException e) {
+			// success = false;
+			logger.error(e.getMessage());
+			throw e;
+		}
+		return list;
 	}
 }

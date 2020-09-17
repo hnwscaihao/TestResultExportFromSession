@@ -24,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.fc.util.ConfigFiled;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -118,7 +119,8 @@ public class ExportApplicationUI extends JFrame {
 	 * @throws Exception
 	 */
 	public void startExport() throws Exception {
-		run.documentName = documentName;
+		run.documentName = exportType;
+		run.filePath = filePath;
 		run.tsIds = caseIDList;
 		run.cmd = cmd;
 		thread = new Thread(run);
@@ -298,21 +300,17 @@ public class ExportApplicationUI extends JFrame {
 	public static void initMksCommand() {
 		try {
 			String host = ExportApplicationUI.ENVIRONMENTVAR.get(Constants.MKSSI_HOST);
+			Map<String,String>  map = ConfigFiled.getPath1("ConfigFiled.properties",Arrays.asList("host","port","loginName","passWord"));
 			if(host==null || host.length()==0) {
-//				host = "192.168.6.130";
-				host = "192.168.6.130";
-//				host = "192.168.229.133";
-//				host = "10.255.33.189";
+				host = map.get("host");
 			}
 			String portStr = ENVIRONMENTVAR.get(Constants.MKSSI_PORT);
 			Integer port = portStr!=null && !"".equals(portStr)? Integer.valueOf(portStr) : 7001;
 			String defaultUser = ENVIRONMENTVAR.get(Constants.MKSSI_USER);
 			String pwd = "";
 			if(defaultUser == null || "".equals(defaultUser) ){
-//				defaultUser = "GW00165407";
-//				pwd = "123369";
-				defaultUser = "admin";
-				pwd = "admin";
+				defaultUser  = map.get("loginName");
+				pwd = map.get("passWord");
 			}
 			logger.info("host:" + host+"; defaultUser:"+defaultUser+"; pwd:"+pwd);
 			cmd = new MKSCommand(host, 7001, defaultUser, pwd, 4, 16);
@@ -336,65 +334,72 @@ public class ExportApplicationUI extends JFrame {
 			for (int index = 0; index < Integer.parseInt(issueCount); index++) {
 				String id = ExportApplicationUI.ENVIRONMENTVAR.get(String.format(Constants.MKSSI_ISSUE_X, index));
 				ExportApplicationUI.logger.info("get the selection test Suite : " + id);
-				tsIds.add(id);//获取到当前选中的id添加进集合Ids集合
+				caseIDList.add(id);//获取到当前选中的id添加进集合Ids集合
 			}
 		} else {
 			ExportApplicationUI.logger.info("No ID was obtained!!! :" + issueCount); 
 		}
-//		tsIds.add("54118");
-		tsIds.add("9870");
-		if(tsIds.size()>1){
+		Map<String,String>  map = ConfigFiled.getPath1("ConfigFiled.properties",Arrays.asList("id"));
+
+		if(caseIDList.size() == 0){
+			caseIDList.add(map.get("id"));
+		}
+		logger.info("选中的项目为"+caseIDList.get(0));
+		if(caseIDList.size()>1){
 			JOptionPane.showMessageDialog(null, "暂时不支持多选！","错误",0);
 			System.exit(0);
 		}
-		if (tsIds.size() > 0) {//如果选中的id集合不为空，通过id获取条目简要信息
-			sessionMap = cmd.getItemByIds(tsIds, Arrays.asList("ID", "Type","Summary","tests")).get(0);
+		if (caseIDList.size() > 0) {//如果选中的id集合不为空，通过id获取条目简要信息
+			sessionMap = cmd.getItemByIds(caseIDList, Arrays.asList("ID", "Type","Summary","Project")).get(0);
 			List<String> notTSList = new ArrayList<>();
 				DOCUMENT_TYPE = sessionMap.get("Type");
 				String id = sessionMap.get("ID");
 				documentName = sessionMap.get("Summary");
-				String caseids = sessionMap.get("tests");
+				String Project = sessionMap.get("Project");
 				if(typeList.contains(DOCUMENT_TYPE)){
 					comboBox.setSelectedItem(DOCUMENT_TYPE);
 				}
-				if(!DOCUMENT_TYPE.equals("Test Session")){
-					JOptionPane.showMessageDialog(null, "请选择正确的Test Session ID！","错误",0);
+				if(!DOCUMENT_TYPE.equals("Test Suite")){
+					JOptionPane.showMessageDialog(null, "请选择正确的Test Suite！","错误",0);
 					System.exit(0);
 				}
-				if(caseids == null || caseids.length() == 0){
-					JOptionPane.showMessageDialog(null, "当前Test Session无有效测试结果项！","错误",0);
-					System.exit(0);
-				}else{//将所有Test Case ID记录下来
-					String[] caseIDStrs = caseids.split(","); 
-					List<String> caseTempList = new ArrayList<>();
-					for(String caseID : caseIDStrs){
-						caseTempList.add(caseID);
-					}
-					List<Map<String,String>> itemByIds = cmd.getItemByIds(caseTempList, Arrays.asList("ID", "Type"));
-					for(Map<String, String> caseMap : itemByIds){
-						String type = caseMap.get("Type");
-						String issueId = caseMap.get("ID");
-						if("Test Suite".equals(type)){
-							List<String> allContains = cmd.allContainID(issueId);
-							if(allContains != null && !allContains.isEmpty()){
-								for(String containId : allContains){
-									caseIDList.add(containId);
-								}
-							}
-						}else{
-							caseIDList.add(issueId);
-						}
-					}
-				}
-				
-			if (notTSList.size() > 0) {
-//				throw new Exception("This item " + notTSList + " is not [ " + documentType + " ]! Please  select the right type!");
-			} else {
-				ExportApplicationUI.logger.info("get the selection Document : " + tsIds);
-			}
+
+//			for(Map<String,String> m : lm){
+//				getCaseBySession(m.get("Tests"),m.get("ID"));
+//			}
 		} else {
-			throw new Exception("Please select the ID of a Document!");
+			throw new Exception("Please select the ID of a Project!");
 		}
 		return tsIds;
+	}
+
+	/**
+	 * 通过caseid获取test case信息
+	 */
+	public static void getCaseBySession (String caseids,String ID)throws Exception {
+		if(caseids == null || caseids.length() == 0){
+			logger.info("当前test session没有关联case:" + ID);
+		}else{//将所有Test Case ID记录下来
+			String[] caseIDStrs = caseids.split(",");
+			List<String> caseTempList = new ArrayList<>();
+			for(String caseID : caseIDStrs){
+				caseTempList.add(caseID);
+			}
+			List<Map<String,String>> itemByIds = cmd.getItemByIds(caseTempList, Arrays.asList("ID", "Type"));
+			for(Map<String, String> caseMap : itemByIds){
+				String type = caseMap.get("Type");
+				String issueId = caseMap.get("ID");
+				if("Test Suite".equals(type)){
+					List<String> allContains = cmd.allContainID(issueId);
+					if(allContains != null && !allContains.isEmpty()){
+						for(String containId : allContains){
+							caseIDList.add(containId);
+						}
+					}
+				}else{
+					caseIDList.add(issueId);
+				}
+			}
+		}
 	}
 }

@@ -1,204 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fieldMapping>
-	<!-- excel中字段 -->
-<!--	软件单元测试模板-->
-	<importType name="Software Unit Test Specification" type="Test Suite" mergeStep="true" structure="false"><!-- Software Detail Design// Model --><!--  -->
-		<excelField  name="Test Case ID"  			type="Test Case"  			field="ID"					titleColor="A"/>
-		<excelField  name="Req ID"  				type="Test Case"  			field="Validates"			/>
-		<excelField  name="Priority"  				type="Test Case"  			field="Priority"			/>
-		<excelField  name="Precondition"  			type="Test Case"  			field="Precondition"			/>
-		<excelField  name="Req.Testability"  		type="Test Case"  			field="Req.Testability"		/>
-		<excelField  name="Test Case No."  			type="Test Case"  			field="Test Case No."		/>
-		<excelField  name="Test Case Source Type"  	type="Test Case"  			field="Test Case Source Type"		/>
-		<excelField  name="Test Type"  				type="Test Case"  			field="Test Type BMS"			/>
-		<excelField  name="Test case description"  	type="Test Case"  			field="Text"				/>
-		<excelField  name="Test Step ID"  			type="Test Steps"  			field="ID"					/>
-		<excelField  name="Test Environment"  		type="Test Session"  		field="Test Environment"	/><!-- 无法导出 -->
-		<excelField  name="Expected Results"  		type="Test Case"  			field="Expected Results"	/>
-		<excelField  name="Unit ID"  				type="Test Case"  			field="Unit ID"				/>
-		<excelField  name="Test Case NO."  			type="Test Case"  			field="Test Case NO.bms"				/>
-		<excelField  name="Test Step Description"  	type="Test Case"  			field="Test Step Description"				/>
-		<excelField  name="Pass Criterion"  		type="Test Case"  			field="Pass Criterion"				/>
-		<excelField  name="Detection Method"  		type="Test Case"  			field="Detection Methods"				/>
+    <!-- excel中字段 -->
+    <!--电动系统需求测试-->
+    <importType name="Test Suite" type="Test Suite" mergeStep="true"
+                structure="false"><!-- Software Detail Design// Model --><!--  -->
+        <excelField name="需求编号 Requirements ID" type="Test Case" field="Validates" titleColor="A" title = "h1"/>
+        <excelField name="需求类型 Requirements Type" type="Requirements" field="Type" titleColor="A" title = "h1"/>
+        <excelField name="需求内容 Requirements Content" type="Requirements" field="Comment" titleColor="A" title = "h1"/>
 
-		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
-		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
-		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-		<excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
-		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
-		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
-		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
-		
-		<excelField  name="System Engineer"  						type="Test Case"  		field="System Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="System Engineer Review Result"  			type="Test Case"  		field="System Engineer Review Result"			onlyCreate="false"  overRide="true"/>
-		<excelField  name="Hardware Engineer"  						type="Test Case"  		field="Hardware Engineer"						onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="Hardware Engineer Review Result"  		type="Test Case"  		field="Hardware Engineer Review Result"			onlyCreate="false"  overRide="true"/>
-		<excelField  name="ASW Engineer"  							type="Test Case"  		field="ASW Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="ASW Engineer Review Result"  			type="Test Case"  		field="ASW Engineer Review Result"				onlyCreate="false"  overRide="true"/>
-		<excelField  name="BSW Engineer"  							type="Test Case"  		field="BSW Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="BSW Engineer Review Result"  			type="Test Case"  		field="BSW Engineer Review Result"				onlyCreate="false"  overRide="true"/>
-		<excelField  name="Function Safety Engineer"  				type="Test Case"  		field="Function Safety Engineer"				onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="Function Safety Engineer Review Result"  type="Test Case"  		field="Function Safety Engineer Review Result"	onlyCreate="false"  overRide="true"/>
-		<excelField  name="Test Engineer"  							type="Test Case"  		field="Test Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="Test Engineer Review Result"  			type="Test Case"  		field="Test Engineer Review Result"				onlyCreate="false"  overRide="true"/>
-	</importType>
-<!--	软件集成测试模板-->
-	<importType name="Software Integration Test Specification" type="Test Suite" mergeStep="true" structure="false"> <!-- Software Architectural Design Specification -->
-		<excelField  name="Test Case ID"  			type="Test Case"  			field="ID"					titleColor="A"/>
-		<excelField  name="Req ID"  				type="Test Case"  			field="Validates"			/>
-		<excelField  name="Priority"  				type="Test Case"  			field="Priority"			/>
-		<excelField  name="Req.Input"  				type="Test Case"  			field="Req.Input"			/>
-		<excelField  name="Req.Output"  			type="Test Case"  			field="Req.Output"			/>
-		<excelField  name="Req.Testability"  		type="Test Case"  			field="Req.Testability"		/>
-		<excelField  name="Test Case No."  			type="Test Case"  			field="Test Case No."		/>
-		<excelField  name="Test Case Source Type"  	type="Test Case"  			field="Test Case Source Type"		/>
-		<excelField  name="Test Type"  				type="Test Case"  			field="Test Type BMS"			/>
-		<excelField  name="Test case description"  	type="Test Case"  			field="Text"				/>
-		<excelField  name="Expected Results"  		type="Test Case"  			field="Expected Results"	/>
-		<excelField  name="Test Environment"  		type="Test Session"  		field="Test Environment"	/>
-		<excelField  name="Test Step ID"  			type="Test Step"  			field="ID"		  			titleColor="A"/>
-		<excelField  name="Source Filename"  		type="Test Step"  			field="Source Filename"		  parentField="Call Depth"	titleColor="C"/>
-		<excelField  name="Function"  				type="Test Step"  			field="Function"			  parentField="Call Depth"	titleColor="C"/>
-		<excelField  name="Input I/F &amp; Data"  	type="Test Step"  			field="Input I/F &amp; Data"  parentField="Call Depth"	titleColor="C"/>
-		<excelField  name="Time Constraint"  		type="Test Step"  			field="Time Constraint"		  parentField="Call Depth"	titleColor="C"/>
-		<excelField  name="Output I/F &amp; Data"  	type="Test Step"  			field="Output I/F &amp; Data" parentField="Call Depth"	titleColor="C"/>
-		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
-		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
-		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-        <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
-		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
-		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
-		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
-	</importType>
-<!--	软件鉴定测试模板-->
-	<importType name="Software Qualification Test Specification" type="Test Suite" mergeStep="true" structure="false"><!-- Software Requirement Specification -->
-		<excelField  name="Test Case ID"  			type="Test Case"  			field="ID"					titleColor="A"/>
-		<excelField  name="Req ID"  				type="Test Case"  			field="Validates"			/>
-		<excelField  name="Priority"  				type="Test Case"  			field="Priority"			/>
-		<excelField  name="Req Context"  			type="Test Case"  			field="Req Context"			/>
-		<excelField  name="Req.Input"  				type="Test Case"  			field="Req.Input"			/>
-		<excelField  name="Req.Output"  			type="Test Case"  			field="Req.Output"			/>
-		<excelField  name="Req.Testability"  		type="Test Case"  			field="Req.Testability"		/>
-		<excelField  name="Test Case No."  			type="Test Case"  			field="Test Case No."		/>
-		<excelField  name="Test Case Source Type"  	type="Test Case"  			field="Test Case Source Type"		/>
-		<excelField  name="Test Type"  				type="Test Case"  			field="Test Type BMS"		/>
-		<excelField  name="Test case description"  	type="Test Case"  			field="Text"				/>
-		<excelField  name="Test Environment"  		type="Test Session"  		field="Test Environment"	/>
-		<excelField  name="Precondition"  			type="Test Case"  			field="Precondition"		/>
-		<excelField  name="Test Step ID"  			type="Test Case"  			field="Test Steps"			/>
-		<excelField  name="Test Procedure"  	    type="Test Step"  			field="Test Procedure" 	      titleColor="C"/>
-		<excelField  name="Expected Results"  		type="Test Case"  			field="Expected Results"	/>
+        <excelField name="测试用例编号 Test Case ID" type="Test Case" field="ID" title = "h1"/>
+        <excelField name="测试用例 Test Case" type="Test Case" field="Text" title = "h1"/>
+        <excelField name="测试用例状态 Test Case Status" type="Test Case" field="State" title = "h1"/>
+        <excelField name="测试用例类型 Test Case Type" type="Test Case" field="Test Type" title = "h1"/>
+        <excelField name="测试考察点 Test Points" type="Test Case" field="Points" title = "h1"/>
+        <excelField name="测试分类 Test Classification" type="Test Case" field="Test Level" title = "h1"/>
+        <excelField name="前置条件 Pre-Condition" type="Test Case" field="Pre-condition" title = "h1"/>
 
-		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
-		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
-		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-        <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
-		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
-		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
-		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
-		
-		<excelField  name="System Engineer"  						type="Test Case"  		field="System Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="System Engineer Review Result"  			type="Test Case"  		field="System Engineer Review Result"			onlyCreate="false"  overRide="true"/>
-		<excelField  name="Hardware Engineer"  						type="Test Case"  		field="Hardware Engineer"						onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="Hardware Engineer Review Result"  		type="Test Case"  		field="Hardware Engineer Review Result"			onlyCreate="false"  overRide="true"/>
-		<excelField  name="ASW Engineer"  							type="Test Case"  		field="ASW Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="ASW Engineer Review Result"  			type="Test Case"  		field="ASW Engineer Review Result"				onlyCreate="false"  overRide="true"/>
-		<excelField  name="BSW Engineer"  							type="Test Case"  		field="BSW Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="BSW Engineer Review Result"  			type="Test Case"  		field="BSW Engineer Review Result"				onlyCreate="false"  overRide="true"/>
-		<excelField  name="Function Safety Engineer"  				type="Test Case"  		field="Function Safety Engineer"				onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="Function Safety Engineer Review Result"  type="Test Case"  		field="Function Safety Engineer Review Result"	onlyCreate="false"  overRide="true"/>
-		<excelField  name="Test Engineer"  							type="Test Case"  		field="Test Engineer"							onlyCreate="false"  overRide="false"  titleColor="B"/>
-		<excelField  name="Test Engineer Review Result"  			type="Test Case"  		field="Test Engineer Review Result"				onlyCreate="false"  overRide="true"/>
-	</importType>
-<!--	系统集成测试模板-->
-	<importType name="System Integration Test Specification" type="Test Suite" mergeStep="true" structure="false"> <!-- System Architectural Design -->
-		<excelField  name="Test Case ID"  			type="Test Case"  			field="ID"					titleColor="A"/>
-		<excelField  name="Req ID"  				type="Test Case"  			field="Validates"			/>
-		<excelField  name="Priority"  				type="Test Case"  			field="Priority"			/>
-		<excelField  name="Req.Input"  				type="Test Case"  			field="Req.Input"			/>
-		<excelField  name="Req.Output"  			type="Test Case"  			field="Req.Output"			/>
-		<excelField  name="Req.Testability"  		type="Test Case"  			field="Req.Testability"		/>
-		<excelField  name="Test Case No."  			type="Test Case"  			field="Test Case No."		/>
-		<excelField  name="Test Case Source Type"  	type="Test Case"  			field="Test Case Source Type"		/>
-		<excelField  name="Test Type"  				type="Test Case"  			field="Test Type BMS"			/>
-		<excelField  name="Test case description"  	type="Test Case"  			field="Text"				/>
-		<excelField  name="Test Environment"  		type="Test Session"  		field="Test Environment"	/>
-		<excelField  name="Test Step ID"  			type="Test Step"  			field="ID"					titleColor="A"/>
-		<excelField  name="Function"  				type="Test Step"  			field="Function"			parentField="Test Input"	titleColor="C"/>
-		<excelField  name="H/W"  					type="Test Step"  			field="H/W"					parentField="Test Input"	titleColor="C"/>
-		<excelField  name="Input I/F"  				type="Test Step"  			field="Input I/F"			parentField="Test Input"	titleColor="C"/>
-		<excelField  name="Input Data"  			type="Test Step"  			field="Input Data"			parentField="Test Input"	titleColor="C"/>
-		<excelField  name="Test Step ID"  			type="Test Step"  			field="ID"					/>
-		<excelField  name="Function"  				type="Test Step"  			field="Function"			parentField="Test Output"	titleColor="C"/>
-		<excelField  name="H/W"  					type="Test Step"  			field="H/W"					parentField="Test Output"	titleColor="C"/>
-		<excelField  name="Output I/F"  			type="Test Step"  			field="Output I/F"			parentField="Test Output"	titleColor="C"/>
-		<excelField  name="Expected Output Data"  			type="Test Step"  			field="Expected Output Data"			parentField="Test Output"	titleColor="C"/>
+        <!--		<excelField  name="测试步骤编号 Test Procedure ID"  		type="Test Step"  	 field="ID"		/>-->
+        <excelField name="测试步骤 Test Procedure" type="Test Case" field="Test Procedure" title = "h1"/>
+        <excelField name="测试预期-内部 Expected Results" type="Test Case" field="Expected Results" title = "h1"/>
+<!--        <excelField name="测试预期-外部 Expected Output2" type="Test Case" field="Expected Results" title = "h1"/>-->
 
-		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
-		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
-		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-        <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
-		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
-		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
-		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
-		
-		<excelField  name="System Engineer"  						type="Test Case"  		field="System Engineer"							onlyCreate="false"  overRide="false"	titleColor="B"/>
-		<excelField  name="System Engineer Review Result"  			type="Test Case"  		field="System Engineer Review Result"			onlyCreate="false"  overRide="true"/>
-		<excelField  name="Hardware Engineer"  						type="Test Case"  		field="Hardware Engineer"						onlyCreate="false"  overRide="false"	titleColor="B"/>
-		<excelField  name="Hardware Engineer Review Result"  		type="Test Case"  		field="Hardware Engineer Review Result"			onlyCreate="false"  overRide="true"/>
-		<excelField  name="ASW Engineer"  							type="Test Case"  		field="ASW Engineer"							onlyCreate="false"  overRide="false"	titleColor="B"/>
-		<excelField  name="ASW Engineer Review Result"  			type="Test Case"  		field="ASW Engineer Review Result"				onlyCreate="false"  overRide="true"/>
-		<excelField  name="BSW Engineer"  							type="Test Case"  		field="BSW Engineer"							onlyCreate="false"  overRide="false"	titleColor="B"/>
-		<excelField  name="BSW Engineer Review Result"  			type="Test Case"  		field="BSW Engineer Review Result"				onlyCreate="false"  overRide="true"/>
-		<excelField  name="Function Safety Engineer"  				type="Test Case"  		field="Function Safety Engineer"				onlyCreate="false"  overRide="false"	titleColor="B"/>
-		<excelField  name="Function Safety Engineer Review Result"  type="Test Case"  		field="Function Safety Engineer Review Result"	onlyCreate="false"  overRide="true"/>
-		<excelField  name="Test Engineer"  							type="Test Case"  		field="Test Engineer"							onlyCreate="false"  overRide="false"	titleColor="B"/>
-		<excelField  name="Test Engineer Review Result"  			type="Test Case"  		field="Test Engineer Review Result"				onlyCreate="false"  overRide="true"/>
-	</importType>
-<!--	系统鉴定试验模板-->
-	<importType name="System Qualification Test Specification" type="Test Suite" mergeStep="true" structure="false"> <!-- System Requirement Specification -->
-		<excelField  name="Test Case ID"  			type="Test Case"  			field="ID"					titleColor="A"/>
-		<excelField  name="Req ID"  				type="Test Case"  			field="Validates"			/>
-		<excelField  name="Priority"  				type="Test Case"  			field="Priority"			/>
-		<excelField  name="Req.Input"  				type="Test Case"  			field="Req.Input"			/>
-		<excelField  name="Req.Output"  			type="Test Case"  			field="Req.Output"			/>
-		<excelField  name="Req.Testability"  		type="Test Case"  			field="Req.Testability"		/>
-		<excelField  name="Test Case No."  			type="Test Case"  			field="Test Case No."		/>
-		<excelField  name="Test case description"  	type="Test Case"  			field="Text"				/>
-		<excelField  name="Test Environment"  		type="Test Session"  		field="Test Environment"	/>
-		<excelField  name="Precondition"  			type="Test Case"  			field="Precondition"		/>
-		<excelField  name="Test Step ID"  			type="Test Case"  			field="Test Steps"			/>
-		<excelField  name="Test Procedure"  	    type="Test Step"  			field="Test Procedure" 	      titleColor="C"/>
-		<excelField  name="Expected Results"  		type="Test Case"  			field="Expected Results"	/>
+        <excelField name="测试结果 Result" type="Test Case" field="Last Result" title = "h2"/><!-- 无法导出 -->
+        <excelField name="缺陷编号 Defect ID" type="Test Case" field="Blocked By" title = "h2"/>
+        <excelField name="缺陷描述 Defect Description" type="Defect" field="Summary" title = "h2"/>
+        <excelField name="缺陷等级 Defect Level" type="Defect" field="Risk" title = "h2"/>
+        <excelField name="备注 Comments" type="Test Case" field="Note" title = "h2"/>
+    </importType>
 
-		<excelField  name="Session ID"  			type="Test Result"  		field="sessionID"				/>
-		<excelField  name="Verdict"  				type="Test Result"  		field="Verdict"				/>
-		<excelField  name="Observed Result"  		type="Test Result"  		field="Observed Result"		/>
-		<excelField  name="Annotation"  			type="Test Result"  		field="Annotation"				/>
-<!--		<excelField  name="Serverity"  				type="Test Result"  		field="Result Serverity"			/>-->
-        <excelField  name="Reproducibility"  		type="Test Result"  		field="Reproducibility"			/>
-		<!-- <excelField  name="Reproducilibuty"  		type="Test Result"  		field="Reproducilibuty"			/> -->
-		<excelField  name="SW Version"  			type="Test Result"  		field="SW Version"			/>
-		<excelField  name="HW Version"  			type="Test Result"  		field="HW Result Version"			/>
-		<excelField  name="Tester"  				type="Test Result"  		field="Tester"				/>
-		<excelField  name="Test Date"  				type="Test Result"  		field="Test Date"			/>
-	</importType>
-
-	<!--新添加-->
+    <!--新添加-->
 </fieldMapping>

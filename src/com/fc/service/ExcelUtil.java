@@ -890,5 +890,4 @@ public class ExcelUtil {
 		if (right)
 			style.setBorderRight(border);
 	}
-
 }

@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/lib/log4j.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/mksapi.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/poi-3.10-FINAL-20140208.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/fastjson-1.2.54.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/dom4j-2.0.3.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

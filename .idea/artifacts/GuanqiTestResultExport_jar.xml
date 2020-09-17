@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GuanqiTestResultExport:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/GuanqiTestResultExport_jar</output-path>
+    <root id="archive" name="GuanqiTestResultExport.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="GuanqiTestResultExport" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/mksapi.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/poi-3.10-FINAL-20140208.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/log4j.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/fastjson-1.2.54.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/dom4j-2.0.3.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
